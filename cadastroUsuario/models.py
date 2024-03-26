@@ -13,7 +13,7 @@ class Cadastro(models.Model):
     usuario = models.CharField(max_length=15)
     email = models.EmailField(max_length=75)
     senha = models.CharField(max_length=50)
-    data_nascimento = models.DateField(help_text='aaaa/dd/mm')
+    data_nascimento = models.DateField()
     data_cadastro = models.DateTimeField(auto_now_add=True)
 
     def str(self):
