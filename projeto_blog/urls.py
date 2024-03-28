@@ -17,10 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from cadastroUsuario.views import home, cadastroUsuario, login
+from noticia.views import listarNoticias, adicionarNoticia
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home),
     path("cadastro", cadastroUsuario),
     path("login", login),
+    path('listarNoticias', listarNoticias, name= 'listarNoticias'),
+    path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),
 ]
