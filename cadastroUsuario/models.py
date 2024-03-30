@@ -9,7 +9,7 @@ class Cadastro(models.Model):
 
     nome = models.CharField(max_length=50)
     sobrenome = models.CharField(max_length=50)
-    Genero = models.CharField(max_length=10, choices=Genero_Choice)
+    genero = models.CharField(max_length=10, choices=Genero_Choice)
     usuario = models.CharField(max_length=15)
     email = models.EmailField(max_length=75)
     senha = models.CharField(max_length=50)

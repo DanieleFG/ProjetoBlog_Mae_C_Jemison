@@ -6,4 +6,4 @@ class CadastroUsuarioForm(forms.ModelForm):
 
     class Meta:
         model = Cadastro
-        fields = ['nome', 'sobrenome', 'sexo', 'usuario', 'email', 'senha', 'data_nascimento']
+        fields = ['nome', 'sobrenome', 'genero', 'usuario', 'email', 'senha', 'data_nascimento']

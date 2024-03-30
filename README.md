@@ -66,6 +66,12 @@ pip install django-bootstrap-v5
  ```
     python3 manage.py migrate
  ```
-
+ ### Comandos para ecriar super usuario
+ ```
+    python3 manage.py createsuperuser
+ ```
+usuario: admin
+senha: admin
+email: admin@gmail.com
 video explicando upload imagens
 https://www.youtube.com/watch?v=uoiiwyemmvw
