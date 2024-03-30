@@ -1,26 +1,20 @@
 /* stylelint-disable selector-list-comma-newline-after */
 
-.blog-header-logo {
-  font-size: 4.5rem;
-}
-
 
 body {
-  margin: 0;
+  margin: 10;
   font-family: var(--bs-font-sans-serif);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #ad4d20;
   background-color: #403852;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   padding-top: 3rem;
   padding-bottom: 3rem;
-  color: #5a5a5a;
-  
+    
 }
-
+/* topo da página */
 .form-control {
   display: block;
   width: 100%;
@@ -39,64 +33,98 @@ body {
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   
 }
+/*Bloco Geral*/
+.honk-container {
+  font-weight: 200;
+  font-style: normal;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  border-top: 1px solid white ;
 
+}
+
+/* Botão Login */
 .btn-primary{
- 
   font-weight: 400;
   line-height: 1.5;
   color: #dee9f3;
+  background-color: #575454;
   border: 1px solid #ced4da;
   position: absolute;
   top: 10px; /* distância do topo */
   right: 200px; /* distância da direita */
 }
-
+/* Botão Cadastre-se */
 .btn-secondary{
- 
   font-weight: 400;
   line-height: 1.5;
   color: #dee9f3;
   border: 1px solid #ced4da;
+  background-color: #575454;
   position: absolute;
   top: 10px; /* distância do topo */
   right: 60px; /* distância da direita */
 }
+/* Botão Search */
 .btn-outline-success {
   font-weight: 400;
   line-height: 1.5;
   color: #dee9f3;
   border: 1px solid #ced4da;
+  background-color: #575454;
   position: center;
   top: 10px; /* distância do topo */
   right: 200px; /* distância da direita */
 }
 
-/* Carousel base class */
-.carousel {
-  margin-bottom: 4rem;
+.imagem-logo {
+  position: absolute;
+  top: 50px;
+  left: 800px;
 }
+
+/* Caixa atrás da Logo */
+.text-center {
+  height: 220px;
+  width: 100px;
+}
+
+/* Esferas de notícias  */
+.carousel {
+  margin-bottom: 5rem;
+}
+
+
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
-  bottom: 5rem;
+  bottom: 4rem;
   z-index: 10;
+  font: optional;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
-  height: 24rem;
-  
+  height: 20rem;
 }
-.carousel-item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 100rem;
-  color:rgb(116, 91, 141);
+
+/* links */
+.link1 {
+  color:#ced4da;
+}
+.link1:hover {
+  color: #403852;
+}
+.linkheading1 {
+  text-decoration: none;
+  color: violet;
+}
+.linkheading1:hover {
+  color: #bc7abe;
 }
 
 
-/* MARKETING CONTENT
+/* MARKETING CONTENT (Esferas de notícias)
 -------------------------------------------------- */
 
 /* Center align the text within the three columns below the carousel */
@@ -115,7 +143,7 @@ body {
 /* rtl:end:ignore */
 
 
-/* Featurettes
+/* Featurettes (Notícias com imagens grandes ao lado)
 ------------------------- */
 
 .featurette-divider {
@@ -124,14 +152,19 @@ body {
 
 /* Thin out the marketing headings */
 .featurette-heading {
+  text-decoration: none;
+  color: violet;
   font-weight: 300;
   line-height: 1;
   /* rtl:remove */
   letter-spacing: -.05rem;
 }
+.featurette-heading:hover {
+  color: #bc7abe;
+}
 
 
-/* RESPONSIVE CSS
+/* RESPONSIVE CSS (NÃO SEI ESSE)
 -------------------------------------------------- */
 
 @media (min-width: 40em) {
@@ -141,7 +174,6 @@ body {
     font-size: 1.25rem;
     line-height: 1.4;
   }
-
   .featurette-heading {
     font-size: 50px;
   }
@@ -153,54 +185,28 @@ body {
   }
 }
 
+/* Fontes */
+
 h2 {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: blueviolet;
-}
-h3 {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: greenyellow;
-}
-h4 {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: rgb(33, 148, 194);
-}
-h5 {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: rgb(36, 5, 48);
-}
-h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
-  color: #8f1717;
 }
 
-
-
-/*inseri uma fonte do google*/
-
-.blog-header-logo {
-  font-family: "Honk", system-ui;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "MORF" 15,
-    "SHLN" 50;
-    
-}
-
-/*inseri uma fonte do google*/
 h1 {
   font-family: "Bungee Spice", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
-
-
+.lead {
+  color: #bbb0b0;
+}
+.row {
+  color: #bbb0b0;
+}
 
 .display-4 {
   font-size: 2.5rem;
 }
+
 @media (min-width: 768px) {
   .display-4 {
     font-size: 3rem;
@@ -231,10 +237,7 @@ h1 {
   font-size: .875rem;
 }
 
-.card-img-right {
-  height: 100%;
-  border-radius: 0 3px 3px 0;
-}
+
 
 .flex-auto {
   flex: 0 0 auto;
@@ -258,16 +261,23 @@ h1 {
  */
 .blog-post {
   margin-bottom: 4rem;
+  margin-left: 2rem;
+  color: #bbb0b0;
 }
+
 .blog-post-title {
+  text-decoration: none;
   margin-bottom: .25rem;
   font-size: 2.5rem;
+  color: violet;
+}
+.blog-post-title:hover {
+  color: #bc7abe;
 }
 .blog-post-meta {
   margin-bottom: 1.25rem;
-  color: #6b2828;
+  color: #bbb0b0;
 }
-
 /*
  * Footer
  */
@@ -275,7 +285,7 @@ h1 {
   padding: 2.5rem 0;
   color: #dad9d9;
   text-align: center;
-  background-color: #575454;
+  background-color: #8f7a94;
   border-top: .05rem solid #e5e5e5;
 }
 .blog-footer p:last-child {
