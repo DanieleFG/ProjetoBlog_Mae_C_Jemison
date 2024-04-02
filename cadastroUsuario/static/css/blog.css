@@ -2,18 +2,22 @@
 
 
 body {
-  margin: 10;
+  /* margin:0 auto; */
   font-family: var(--bs-font-sans-serif);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  background-color: #403852;
+  background-color: #171429;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   padding-top: 3rem;
   padding-bottom: 3rem;
     
 }
+/* main {
+  background-color: #fff;
+  color: #000;
+} */
 /* topo da página */
 .form-control {
   display: block;
@@ -78,11 +82,20 @@ body {
 }
 
 .imagem-logo {
-  position: absolute;
+  /* position: absolute;
   top: 50px;
-  left: 800px;
+  left: 800px; */
+  width: auto;
+  display:flex;
+  align-items: center;
+  position: center;
+  flex: 1;
+  background-color: #171429;
 }
-
+.alinharCenter {
+  display:flex;
+  align-items: center;
+}
 /* Caixa atrás da Logo */
 .text-center {
   height: 220px;
@@ -192,7 +205,7 @@ h2 {
 }
 
 h1 {
-  font-family: "Bungee Spice", sans-serif;
+  font-family: "Arial", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
