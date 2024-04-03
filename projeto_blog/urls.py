@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from cadastroUsuario.views import home, cadastroUsuario, login
-from noticia.views import listarNoticias, adicionarNoticia
+from noticia.views import listarNoticias, adicionarNoticia, Noticia
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path("login", login),
     path('listarNoticias', listarNoticias, name= 'listarNoticias'),
     path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),
+    path('listarNoticias/<int:pk>', Noticia.as_view(), name='noticia')
 ]
 urlpatterns += [
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),

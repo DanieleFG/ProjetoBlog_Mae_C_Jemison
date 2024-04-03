@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Indy">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>{% block titulo %}  {% endblock %}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
+    <!--Fonte Lançamentos-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+    <!--estilo dos blocoes de imagem-->
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../static/css/blog.css" rel="stylesheet">
+  </head>
+
+  <body>
+<!-- Topo da página-->
+<div class="container">
+  <header class="blog-header py-3">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <form class="d-flex" >
+              <a href="cadastro" target="_blank" class="btn btn-secondary" > Cadastre-se </a>
+              <a href="login" target="_blank" class="btn btn-primary" > Login </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--Logo do site-->
+    <div class="imagem-logo " >
+      <img src="../static/img/PontoGeek_logo.png" class="rounded mx-auto d-block" alt="" width="350px" height="250px">
+    </div>
+  </header>
+</div>
+<!--Primeiro bloco de Lançamentos-->
+<main class="honk-container ">
+
+  {% block content %} {% endblock %}
+
+</main>
+
+   
+<footer class="blog-footer">
+  <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+  <p>
+    <a href="#">Back to top</a>
+  </p>
+</footer>
+
+
+  <script src="script.js"></script>
+  <script src="../static/bootstrap/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
