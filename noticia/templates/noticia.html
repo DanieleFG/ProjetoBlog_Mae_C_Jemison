@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+
+{% endblock %}
+
+
+{% block content %}
+  <h1 class="blog-post-title"> {{ object.titulo }} </h1>
+
+  <div class="blog-post-meta">
+    
+    {{ object.id_categoria }}
+    {{ object.id_autor }}
+    {{ object.data_publicacao }}
+
+    <img src="{{object.imagem.url}}" alt="">
+
+  </div>
+
+  <div class="blog-post-meta">
+    {{ object.conteudo }}
+    <br>
+    
+  </div>
+  
+
+{% endblock %}

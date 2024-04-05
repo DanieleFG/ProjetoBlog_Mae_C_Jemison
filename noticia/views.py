@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView
 from .models import Noticia
 from .form import NoticiaForm
 
@@ -15,3 +16,10 @@ def adicionarNoticia(request):
     else:
         form = NoticiaForm()
     return render(request, 'noticia/adicionarNoticia.html', {'form': form})
+
+class Noticia(DetailView):
+    template_name = 'noticia.html'
+    model = Noticia
+
+
+

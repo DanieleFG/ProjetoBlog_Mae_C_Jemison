@@ -44,41 +44,38 @@
 {% block posts %}
 {% for ult_noticia in ult_noticias|slice:"3:"  %}
   {% if forloop.counter <= 3 %}
-<hr class="featurette-divider">
-<div class="row featurette">
-  <div class="col-md-7">
-    <h2><a href="#" class="featurette-heading text-white">{{ ult_noticia.titulo|slice:":50" }}...</a> <br><span class="text-muted">{{ ult_noticia.data_publicacao }}</span></h2>
-    <p class="lead">{{ ult_noticia.conteudo|striptags|slice:":100" }}...</p>
-  </div>
-  <div class="col-md-5">
-    <img src="media/{{ult_noticia.imagem}}" class="rounded-circle bd-placeholder-img bd-placeholder-img-lg featurette-image mx-auto" width="300" height="250" alt="image_noticia">
+    <hr class="featurette-divider">
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2><a href="{%  url 'noticia' ult_noticia.pk %}" class="featurette-heading text-white">{{ ult_noticia.titulo|slice:":50" }}...</a> <br><span class="text-muted">{{ ult_noticia.data_publicacao }}</span></h2>
+        <p class="lead">{{ ult_noticia.conteudo|striptags|slice:":100" }}...</p>
+      </div>
+      <div class="col-md-5">
+        <img src="media/{{ult_noticia.imagem}}" class="rounded-circle bd-placeholder-img bd-placeholder-img-lg featurette-image mx-auto" width="300" height="250" alt="image_noticia">
 
-    {% comment %} <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> {% endcomment %}
+        {% comment %} <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> {% endcomment %}
 
-  </div>
-</div>
+      </div>
+    </div>
   {% endif %}
 {%endfor%}
 {% endblock%}
-{%block posts2 %}
-<hr class="featurette-divider">
-{% for ult_noticia in ult_noticias|slice:"6:"  %}
 
+{%block posts2 %}
+
+<hr class="featurette-divider">
+
+{% for ult_noticia in ult_noticias|slice:"6:"  %}
 <article class="blog-post">
   <div style="display:flex;  align-items: center;">
     <div style="width:150px; height:80px; overflow-y: hidden; border-radius: 15px 50px;" >
       <img src="media/{{ult_noticia.imagem}}" style="float: left; margin-right: 20px;" width="250" alt="image_noticia">
-      
     </div>
     <div style=" flex: 1; margin: 20px;">
-      <h4 class="text-white"><a href="#" class="text-white text-decoration-none">{{ ult_noticia.titulo|slice:":50" }}...</a></h4>
-      <p class="blog-post-meta">{{ ult_noticia.data_publicacao }} <a href="#"></a></p>
-  
+      <h4 class="text-white"><a href="{% url 'noticia' ult_noticia.pk %}" class="text-white text-decoration-none">{{ ult_noticia.titulo|slice:":50" }}...</a></h4>
+      <p class="blog-post-meta">{{ ult_noticia.data_publicacao }} 
     </div>
-
-  </div>
-
-        
+  </div>     
 </article>
 {% endfor %}
 {%endblock%}
