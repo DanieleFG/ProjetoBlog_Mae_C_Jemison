@@ -20,6 +20,7 @@ from cadastroUsuario.views import home, cadastroUsuario, login
 from noticia.views import listarNoticias, adicionarNoticia
 from django.conf import settings
 from django.conf.urls.static import static
+from comentarios.views import adicionar_comentario
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,6 +29,8 @@ urlpatterns = [
     path("login", login),
     path('listarNoticias', listarNoticias, name= 'listarNoticias'),
     path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),
+    path('adicionar_comentario/', adicionar_comentario, name='adicionar_comentario'),
+    
 ]
 urlpatterns += [
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
