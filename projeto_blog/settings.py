@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "bootstrap5",
     "noticia",
     "django_ckeditor_5",
+    "comentarios",
     
 ]
 
