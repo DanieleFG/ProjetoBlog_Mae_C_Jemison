@@ -24,6 +24,10 @@
         user-select: none;
       }
 
+      .cor_fundo {
+        background-color: #171429;
+      }
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -36,7 +40,7 @@
     <link href="../static/css/form-validation.css" rel="stylesheet">
   </head>
 
-  <body class="text-center bg-dark">
+  <body class="text-center cor_fundo">
     
 <div class="container">
   <main>
@@ -50,7 +54,7 @@
     {% else %}
 
    
-      <div class="text-center">
+      <div class="text-center text-white">
          {% load bootstrap5 %}
         <form class="needs-validation" method="POST" novalidate>
           {% csrf_token %}
