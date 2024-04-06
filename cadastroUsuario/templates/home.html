@@ -10,22 +10,22 @@
       <div class="carousel-item active">
         <img src="media/{{ult_noticias.0.imagem}}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5 class="text-truncate">{{ ult_noticias.0.titulo|slice:":50" }}...</h5>
-          <p class="text-truncate">{{ ult_noticias.0.conteudo|striptags|slice:":100" }}...</p>
+          <a class="font-titulo" href="{%  url 'noticia' ult_noticias.0.pk %}"><h5 class="font-titulo" >{{ ult_noticias.0.titulo|slice:":50" }}...</h5></a>
+          <p class="font-texto">{{ ult_noticias.0.conteudo|striptags|slice:":100" }}...</p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="media/{{ult_noticias.1.imagem}}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5 class="text-truncate">{{ ult_noticias.1.titulo|slice:":50" }}...</h5>
-          <p class="text-truncate">{{ ult_noticias.1.conteudo|striptags|slice:":100" }}...</p>
+          <a class="font-titulo" href="{%  url 'noticia' ult_noticias.1.pk %}"><h5 class="font-titulo">{{ ult_noticias.1.titulo|slice:":50" }}...</h5></a>
+          <p class="font-texto">{{ ult_noticias.1.conteudo|striptags|slice:":100" }}...</p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="media/{{ult_noticias.2.imagem}}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5 class="text-truncate">{{ ult_noticias.2.titulo|slice:":50" }}...</h5>
-          <p class="text-truncate">{{ ult_noticias.2.conteudo|striptags|slice:":100" }}...</p>
+          <a class="font-titulo" href="{%  url 'noticia' ult_noticias.2.pk %}"><h5 class="font-titulo">{{ ult_noticias.2.titulo|slice:":50" }}...</h5></a>
+          <p class="font-texto">{{ ult_noticias.2.conteudo|striptags|slice:":100" }}...</p>
         </div>
       </div>
     </div>

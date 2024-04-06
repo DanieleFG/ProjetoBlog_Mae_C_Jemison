@@ -14,6 +14,19 @@ body {
   padding-bottom: 3rem;
     
 }
+.font-titulo{
+  text-shadow: 2px 2px 5px #000;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 30px;
+  text-decoration: none;
+  color: white;
+}
+.font-texto{
+  text-shadow: 3px 3px 5px #000000;
+  font-weight: normal;
+  color: #f7dfdf;
+}
 /* main {
   background-color: #fff;
   color: #000;
