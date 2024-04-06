@@ -6,23 +6,34 @@
 
 
 {% block content %}
-  <h1 class="blog-post-title"> {{ object.titulo }} </h1>
 
-  <div class="blog-post-meta">
-    
-    {{ object.id_categoria }}
-    {{ object.id_autor }}
-    {{ object.data_publicacao }}
+<div class="container-md">
+    <div class="row">
+      <div class="col">
+          <center><h1 class="blog-post-title"> {{ object.titulo }} </h1></center>
+          <br>
 
-    <img src="{{object.imagem.url}}" alt="">
+          <div class="blog-post-meta">
+                <center><img class="img-fluid" src="{{object.imagem.url}}" alt="" width="1100px"><center>
+          </div>
 
+          <div class="blog-post-meta">
+            <p class="fw-normal">
+                <span>{{ object.id_categoria }}</span> |  
+                <strong>Autor:</strong> {{ object.id_autor }} |  
+                <strong>{{ object.data_publicacao|date:"d-m-Y"  }}</strong>
+              </p>
+            <span class="fw-normal lh-base ">
+              {{ object.conteudo|safe }}
+          
+             
+            </span>
+            <br>            
+          </div>
+    </div>
   </div>
+</div>
 
-  <div class="blog-post-meta">
-    {{ object.conteudo }}
-    <br>
-    
-  </div>
-  
+
 
 {% endblock %}
