@@ -23,4 +23,4 @@ class CategotiaForm(forms.ModelForm):
 class AutorForm(forms.ModelForm):
         class Meta:
               model = Autor
-              fields = ['autor', 'descricao', 'data_inicio', 'status']
+              fields = ['autor', 'descricao', 'data_inicio', 'status', 'imagem']

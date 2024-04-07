@@ -13,6 +13,18 @@ class Autor(models.Model):
     descricao = models.CharField(max_length=500)
     data_inicio = models.DateField()
     status = models.CharField(max_length=10, choices=status_Choice)
+    imagem = models.ImageField(upload_to="uploads/autores", default="default.jpg")
+    def save(self, *args, **kwargs):
+       
+        if self.imagem and hasattr(self.imagem, 'name') and not self.imagem.name.startswith('uploads/noticias/'):
+            ext = self.imagem.name.split('.')[-1]
+            # print(self)
+            today = datetime.now().strftime('%Y%m%d%H%M%S')
+
+            new_filename = f'autor_{today}.{ext}'
+            self.imagem.name = new_filename
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.autor} [{self.status}]'

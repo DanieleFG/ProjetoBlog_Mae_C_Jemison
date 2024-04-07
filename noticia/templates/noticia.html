@@ -20,7 +20,7 @@
           <div class="blog-post-meta">
             <p class="fw-normal">
                 <span>{{ object.id_categoria }}</span> |  
-                <strong>Autor:</strong> {{ object.id_autor }} |  
+                <strong>Autor:</strong> {{ object.id_autor.autor }} |  
                 <strong>{{ object.data_publicacao|date:"d-m-Y"  }}</strong>
               </p>
             <span class="fw-normal lh-base ">
@@ -34,8 +34,14 @@
   </div>
 </div>
 
-<div> Comentários
-
+<div> 
+  <div class="card mb-3">
+    <div class="card-body">
+      <img src="/media/{{ object.id_autor.imagem }} " width="80px" class="float-start rounded-circle pe-3" alt="foto-autor">
+      <h5 class="card-title">Autor: {{ object.id_autor.autor }}</h5>
+      <p class="card-text ">{{ object.id_autor.descricao }}</p>
+    </div>
+  </div>
 </div>
 
 
