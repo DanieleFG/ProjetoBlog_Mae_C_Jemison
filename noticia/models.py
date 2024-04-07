@@ -45,7 +45,7 @@ class Noticia(models.Model):
     imagem = models.ImageField(upload_to="uploads/noticias")
     def save(self, *args, **kwargs):
        
-        if self.imagem and hasattr(self.imagem, 'name'):
+        if self.imagem and hasattr(self.imagem, 'name') and not self.imagem.name.startswith('uploads/noticias/'):
             ext = self.imagem.name.split('.')[-1]
             # print(self)
             today = datetime.now().strftime('%Y%m%d%H%M%S')
