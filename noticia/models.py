@@ -57,7 +57,7 @@ class Noticia(models.Model):
 
 
     def __str__(self):
-        return f"ID: {self.id}, titulo: {self.titulo}, Data: {self.data_publicacao},  texto: {self.conteudo}"
+        return f"ID: {self.id}, titulo: {self.titulo}, Data: {self.data_publicacao},  conteudo: {self.conteudo}"
     
     class Meta:
         verbose_name = 'Noticia'

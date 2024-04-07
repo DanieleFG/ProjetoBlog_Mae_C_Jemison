@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from cadastroUsuario.form import CadastroUsuarioForm
 from noticia.models import Noticia
+import html
 
 # Create your views here.
 
-def home(request):
-    # ult_noticia = fetchUltimoRegistro()
-    # print(ult_noticia)
+def home(request):  
     ult_noticia = Noticia.objects.all()
+    ult_noticia = tratarConteudo(ult_noticia)
+    if request.method == 'POST':
+        ult_noticia =fetchbuscarTag(request.POST.get('buscar-tag'))
+        print('-----------------------------------------------------')
+        print(ult_noticia)
+        return render(request, 'categorias.html', {'ult_noticias': ult_noticia})
     contexto = {
         'ult_noticias': ult_noticia
     }
@@ -36,6 +41,21 @@ def fetchUltimoRegistro():
         if ult_noticia:
             columns = [col[0] for col in cursor.description]
             ult_noticias_dicts = [dict(zip(columns, noticia)) for noticia in ult_noticia]
+           
         return ult_noticias_dicts
     return None
 
+def fetchbuscarTag(buscar_tag):
+    ult_noticia = []
+    if buscar_tag:
+        ult_noticia.extend(Noticia.objects.filter(titulo__icontains=buscar_tag))
+        ult_noticia.extend(Noticia.objects.filter(id_categoria__categoria__icontains=buscar_tag))  
+        
+        return ult_noticia
+    else:
+        return Noticia.objects.all()
+
+def tratarConteudo(ult_noticia):
+    for noticia in ult_noticia:
+        noticia.conteudo = html.unescape(noticia.conteudo)
+    return ult_noticia
