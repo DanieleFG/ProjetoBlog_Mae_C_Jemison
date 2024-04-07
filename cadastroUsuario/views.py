@@ -59,3 +59,14 @@ def tratarConteudo(ult_noticia):
     for noticia in ult_noticia:
         noticia.conteudo = html.unescape(noticia.conteudo)
     return ult_noticia
+
+def categorias(request, categoria):
+    noticias = Noticia.objects.filter(id_categoria__categoria__icontains=categoria)
+    print(noticias)
+    contexto = {
+        'ult_noticias': noticias,
+        'categoria': categoria
+    }
+
+    # Retorna a renderização do template com as notícias filtradas
+    return render(request, 'categorias.html', contexto)

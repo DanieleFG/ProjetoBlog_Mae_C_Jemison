@@ -8,7 +8,7 @@
 <article class="blog-post">
   <div style="display:flex;  align-items: center;"> {{ult_noticia}}
     <div style="width:150px; height:80px; overflow-y: hidden; border-radius: 15px 50px;" >
-      <img src="media/{{noticia.imagem}}" style="float: left; margin-right: 20px;" width="250" alt="image_noticia">
+      <img src="/media/{{noticia.imagem}}" style="float: left; margin-right: 20px;" width="250" alt="image_noticia">
     </div>
     <div style=" flex: 1; margin: 20px;">
       <h4 class="text-white"><a href="{% url 'noticia' noticia.pk %}" class="text-white text-decoration-none">{{ noticia.titulo|slice:":50" }}...</a></h4>

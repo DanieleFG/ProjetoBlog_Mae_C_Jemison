@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from cadastroUsuario.views import home, cadastroUsuario, login
+from cadastroUsuario.views import home, cadastroUsuario, login, categorias
 from noticia.views import listarNoticias, adicionarNoticia, Noticia
 from django.conf import settings
 from django.conf.urls.static import static
@@ -32,6 +32,7 @@ urlpatterns = [
     path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),
 
     path('listarNoticias/<int:pk>', Noticia.as_view(), name='noticia'),
+    path('categoria/<str:categoria>', categorias)
     
 
 ]
