@@ -1,11 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.views.generic import DetailView
-from .models import Noticia
+
 from .form import NoticiaForm
+from .models import Noticia
+
 
 def listarNoticias(request):
     noticias = Noticia.objects.all()
-    return render(request, 'noticia/listarNoticias.html', {'noticias': noticias})
+    return render(request, 'noticia/listarNoticias.html',
+                  {'noticias': noticias})
+
 
 def adicionarNoticia(request):
     if request.method == 'POST':
@@ -17,9 +21,7 @@ def adicionarNoticia(request):
         form = NoticiaForm()
     return render(request, 'noticia/adicionarNoticia.html', {'form': form})
 
+
 class Noticia(DetailView):
     template_name = 'noticia.html'
     model = Noticia
-
-
-

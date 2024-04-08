@@ -14,28 +14,33 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from cadastroUsuario.views import home, cadastroUsuario, login, categorias
-from noticia.views import listarNoticias, adicionarNoticia, Noticia
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
+
+from cadastroUsuario.views import cadastroUsuario, categorias, home, login
 from comentarios.views import adicionar_comentario
+from noticia.views import Noticia, adicionarNoticia, listarNoticias
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home),
-    path('adicionar_comentario/', adicionar_comentario, name='adicionar_comentario'),
+    path(
+        'adicionar_comentario/',
+        adicionar_comentario,
+        name='adicionar_comentario'
+    ),
     path("cadastro", cadastroUsuario),
     path("login", login),
-    path('listarNoticias', listarNoticias, name= 'listarNoticias'),
+    path('listarNoticias', listarNoticias, name='listarNoticias'),
     path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),
-
     path('listarNoticias/<int:pk>', Noticia.as_view(), name='noticia'),
     path('categoria/<str:categoria>', categorias)
-    
-
 ]
+
 urlpatterns += [
-    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
+    path("ckeditor5/",
+         include('django_ckeditor_5.urls'),
+         name="ck_editor_5_upload_file"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

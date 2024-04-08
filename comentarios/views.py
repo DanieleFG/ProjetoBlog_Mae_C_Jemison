@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.shortcuts import redirect, render
+
 from .forms import ComentarioForm
 
 # Create your views here.
+
 
 def adicionar_comentario(request):
     if request.method == 'POST':
@@ -12,7 +14,8 @@ def adicionar_comentario(request):
             comentario.autor = request.user
             comentario.save()
             messages.success(request, 'Comentário adicionado com sucesso!')
-            return redirect('detalhes_postagem')  # Redirecionar para a página de detalhes da postagem
+            return redirect('detalhes_postagem')
     else:
         form = ComentarioForm()
-    return render(request, 'comentarios/adicionar_comentario.html', {'form': form})
+    return render(request, 'comentarios/adicionar_comentario.html',
+                  {'form': form})

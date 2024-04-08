@@ -12,9 +12,9 @@ body {
   -webkit-tap-highlight-color: transparent;
   padding-top: 3rem;
   padding-bottom: 3rem;
-    
 }
-.font-titulo{
+
+.font-titulo {
   text-shadow: 2px 2px 5px #000;
   text-transform: uppercase;
   font-weight: 900;
@@ -22,11 +22,13 @@ body {
   text-decoration: none;
   color: white;
 }
-.font-texto{
+
+.font-texto {
   text-shadow: 3px 3px 5px #000000;
   font-weight: normal;
   color: #f7dfdf;
 }
+
 /* main {
   background-color: #fff;
   color: #000;
@@ -48,8 +50,8 @@ body {
   appearance: none;
   border-radius: .25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  
 }
+
 /*Bloco Geral*/
 .honk-container {
   font-weight: 200;
@@ -57,7 +59,6 @@ body {
   margin-left: 10rem;
   margin-right: 10rem;
   border-top: 1px solid white ;
-
 }
 
 /* Botão Login */
