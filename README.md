@@ -8,6 +8,7 @@ envolvente Sistema de Blog com Django.
 ## Portal de Noticias Mae C Jemison
 
 ### Instalação do ambiente virtual
+
  ```
  pip install virtualenv
 
@@ -33,6 +34,7 @@ pip install django
 ```
 
 ### Criar Projeto
+
 ```
 django-admin startproject projeto_blog .
 
@@ -51,25 +53,30 @@ python3 manage.py startapp base
 
 
 ### Comando instalar bootstrap
+
 ``` 
 pip install django-bootstrap-v5
 
 ```
 
-
 ### Comandos para criar arquivo do Banco de Dados
+
  ```
     python3 manage.py makemigrations
  ```
 
 ### Comandos para enviar para  Banco de Dados
+
  ```
     python3 manage.py migrate
  ```
+
  ### Comandos para ecriar super usuario
+
  ```
     python3 manage.py createsuperuser
  ```
+
 usuario: admin
 senha: admin
 email: admin@gmail.com
