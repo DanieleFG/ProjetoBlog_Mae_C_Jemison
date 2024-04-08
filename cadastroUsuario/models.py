@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Cadastro(models.Model):
     Genero_Choice = (
         ('F', 'Feminino'),
@@ -23,5 +24,3 @@ class Cadastro(models.Model):
         verbose_name = 'Formulário de Cadastro'
         verbose_name_plural = 'Formulários de Cadastros'
         ordering = ['-data_cadastro']
-
-
