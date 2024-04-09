@@ -40,11 +40,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "cadastroUsuario",
+    # "cadastroUsuario",
     "bootstrap5",
     "noticia",
     "django_ckeditor_5",
     "comentarios",
+    'cadastroUsuario.apps.CadastroUsuarioConfig',
     
 ]
 

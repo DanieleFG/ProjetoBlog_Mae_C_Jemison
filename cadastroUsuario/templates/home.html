@@ -8,21 +8,21 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="media/{{ult_noticias.0.imagem}}" class="d-block w-100" alt="...">
+        <img src="/media/{{ult_noticias.0.imagem}}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <a class="font-titulo" href="{%  url 'noticia' ult_noticias.0.pk %}"><h5 class="font-titulo" >{{ ult_noticias.0.titulo|slice:":50" }}...</h5></a>
           <p class="font-texto">{{ ult_noticias.0.conteudo|striptags|slice:":100" }}...</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="media/{{ult_noticias.1.imagem}}" class="d-block w-100" alt="...">
+        <img src="/media/{{ult_noticias.1.imagem}}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <a class="font-titulo" href="{%  url 'noticia' ult_noticias.1.pk %}"><h5 class="font-titulo">{{ ult_noticias.1.titulo|slice:":50" }}...</h5></a>
           <p class="font-texto">{{ ult_noticias.1.conteudo|striptags|slice:":100" }}...</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="media/{{ult_noticias.2.imagem}}" class="d-block w-100" alt="...">
+        <img src="/media/{{ult_noticias.2.imagem}}" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <a class="font-titulo" href="{%  url 'noticia' ult_noticias.2.pk %}"><h5 class="font-titulo">{{ ult_noticias.2.titulo|slice:":50" }}...</h5></a>
           <p class="font-texto">{{ ult_noticias.2.conteudo|striptags|slice:":100" }}...</p>
@@ -51,7 +51,7 @@
         <p class="lead">{{ ult_noticia.conteudo|striptags|slice:":100" }}...</p>
       </div>
       <div class="col-md-5">
-        <img src="media/{{ult_noticia.imagem}}" class="rounded-circle bd-placeholder-img bd-placeholder-img-lg featurette-image mx-auto" width="300" height="250" alt="image_noticia">
+        <img src="/media/{{ult_noticia.imagem}}" class="rounded-circle bd-placeholder-img bd-placeholder-img-lg featurette-image mx-auto" width="300" height="250" alt="image_noticia">
       </div>
     </div>
   {% endif %}
@@ -66,7 +66,7 @@
 <article class="blog-post">
   <div style="display:flex;  align-items: center;">
     <div style="width:150px; height:80px; overflow-y: hidden; border-radius: 15px 50px;" >
-      <img src="media/{{ult_noticia.imagem}}" style="float: left; margin-right: 20px;" width="250" alt="image_noticia">
+      <img src="/media/{{ult_noticia.imagem}}" style="float: left; margin-right: 20px;" width="250" alt="image_noticia">
     </div>
     <div style=" flex: 1; margin: 20px;">
       <h4 class="text-white"><a href="{% url 'noticia' ult_noticia.pk %}" class="text-white text-decoration-none">{{ ult_noticia.titulo|slice:":50" }}...</a></h4>

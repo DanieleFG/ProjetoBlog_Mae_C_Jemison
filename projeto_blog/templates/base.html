@@ -60,12 +60,21 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <form class="d-flex" >
               <a href="/cadastro" target="_blank" class="btn btn-secondary" > Cadastre-se </a>
+              {% if not usuarios %}
               <a href="/login" target="_blank" class="btn btn-primary" > Login </a>
+              {% endif %}
             </form>
           </div>
         </div>
       </div>
     </nav>
+
+    {% if  usuarios %}
+    <div class="text-white" >
+     <h4 class="text-white"> Bem-vindo, {{ usuarios.nome }}!</h4>
+    </div>
+  
+     {% endif %}
     <!--Logo do site-->
     <div class="imagem-logo " >
       <img src="../static/img/PontoGeek_logo.png" class="rounded mx-auto d-block" alt="" width="350px" height="250px">

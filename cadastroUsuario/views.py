@@ -1,10 +1,13 @@
 import html
-
+from django.http import HttpResponse
 from django.db import connection
 from django.shortcuts import render
-
+from django.contrib.auth import authenticate, login, logout
 from cadastroUsuario.form import CadastroUsuarioForm
 from noticia.models import Noticia
+from cadastroUsuario.models import Cadastro
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
 
 
 def home(request):  
@@ -37,7 +40,7 @@ def cadastroUsuario(request):
     return render(request, 'cadastroUsuario.html', contexto)
 
 
-def login(request):
+def loginView(request):
     return render(request, 'login.html')
 
 
@@ -85,3 +88,31 @@ def categorias(request, categoria):
     }
 
     return render(request, 'categorias.html', contexto)
+def verificar_cadastro(request):
+    ult_noticia = Noticia.objects.all()
+    ult_noticia = tratarConteudo(ult_noticia)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+
+        usuario = authenticate(request, username=email, password=senha)
+        print('usuario auth')
+        print(usuario)
+        usuario_dados = Cadastro.objects.filter(email=email).first()
+        print('usuario Cad')
+        print(usuario_dados)
+        # Verifica se existe um usuário com o email fornecido
+        if usuario:
+            print('Login-------------')
+            print(login(request, usuario))
+            return render(request, 'home.html', {'usuarios': usuario_dados.nome, 'ult_noticias': ult_noticia})
+        else:
+            # Usuário não autenticado
+            return HttpResponse("Usuário não autenticado!")
+    if request.user.is_authenticated:
+        user = request.user
+        usuario_dados = Cadastro.objects.filter(email=user).first()
+        print('usuario User')
+        print(user)
+
+    return render(request, 'home.html', {'usuarios': usuario_dados.nome, 'ult_noticias': ult_noticia})

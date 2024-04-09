@@ -64,14 +64,24 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
           <form class="d-flex" >
             
-            <a href="cadastro" target="_blank" class="btn btn-secondary" > Cadastre-se </a>
-            <a href="login" target="_blank" class="btn btn-primary" > Login </a>
+            <a href="/cadastro" target="_blank" class="btn btn-secondary" > Cadastre-se </a>
+            {% if not usuarios %}
+            <a href="/login" target="_blank" class="btn btn-primary" > Login </a>
+            {%else%}
+            <a href="/adicionarNoticia" target="_blank" class="btn btn-primary" >Interface Admin </a>
+            {% endif %}
           </form>
           
         </div>
         </div>
       </div>
     </nav>
+
+    {% if  usuarios %}
+    <div class="text-white" >
+     <h4 class="text-white"> Bem-vindo, {{ usuarios }}!</h4>
+    </div>
+     {% endif %}
     <!--Logo do site-->
     <div class="imagem-logo " >
       <img src="../static/img/PontoGeek_logo.png" class="rounded mx-auto d-block" alt="" width="350px" height="250px">
@@ -85,14 +95,14 @@
   <div class="nav-scroller py-1 mb-2">
    
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 link-secondary" href="categoria/global">Global</a>
-      <a class="p-2 link-secondary" href="categoria/educacao">Educacao</a>
-      <a class="p-2 link-secondary" href="categoria/tecnologia">Tecnologia</a>
-      <a class="p-2 link-secondary" href="categoria/minha-serie">Minha Série</a>
-      <a class="p-2 link-secondary" href="categoria/asiaticas">Mídias Asiáticas</a>
-      <a class="p-2 link-secondary" href="categoria/filmes">Filmes</a>
-      <a class="p-2 link-secondary" href="categoria/games">Games</a>
-      <a class="p-2 link-secondary" href="categoria/lancamentos">Lançamentos</a>
+      <a class="p-2 link-secondary" href="/categoria/global">Global</a>
+      <a class="p-2 link-secondary" href="/categoria/educacao">Educacao</a>
+      <a class="p-2 link-secondary" href="/categoria/tecnologia">Tecnologia</a>
+      <a class="p-2 link-secondary" href="/categoria/minha-serie">Minha Série</a>
+      <a class="p-2 link-secondary" href="/categoria/asiaticas">Mídias Asiáticas</a>
+      <a class="p-2 link-secondary" href="/categoria/filmes">Filmes</a>
+      <a class="p-2 link-secondary" href="/categoria/games">Games</a>
+      <a class="p-2 link-secondary" href="/categoria/lancamentos">Lançamentos</a>
       
     </nav>
   </div>
