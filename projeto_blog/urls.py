@@ -40,8 +40,9 @@ urlpatterns = [
     path('listarNoticias/<int:pk>', Noticia.as_view(), name='noticia'),
     path('categoria/<str:categoria>', categorias),
     path('logado/', verificar_cadastro, name='logado'),
-    path('excluir_noticia/<int:pk>/', '', name='excluir_noticia'),
     path('editar_noticia/<int:pk>/', editar_noticia, name='editar_noticia'),
+    #path('excluir_noticia/<int:pk>/', '', name='excluir_noticia'),
+    
 ]
 
 urlpatterns += [
