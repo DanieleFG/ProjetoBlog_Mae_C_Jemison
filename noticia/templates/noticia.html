@@ -7,6 +7,7 @@
 
 {% block content %}
 
+
 <div class="container-md">
     <div class="row">
       <div class="col">
@@ -44,6 +45,21 @@
   </div>
 </div>
 
+<div class="comment-container">
+  <h5>Deixe um comentário</h5>
+  <form id="commentForm" onsubmit="submitComment(event)">
+      <label for="username">Nome de Usuário:</label>
+      <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário.." required>
+
+      <label for="comment">Comentário:</label>
+      <textarea id="comment" name="comment" placeholder="Digite seu comentário aqui.." rows="4" required></textarea>
+
+      <label for="date">Data:</label>
+      <input type="date" id="date" name="date" required>
+
+      <input type="submit" value="Enviar">
+  </form>
+</div>
 
 
 
