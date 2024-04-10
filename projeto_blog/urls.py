@@ -20,28 +20,25 @@ from django.contrib import admin
 from django.urls import include, path
 
 from cadastroUsuario.views import (cadastroUsuario, categorias, home,
-                                   loginView, verificar_cadastro, logout_user)
+                                   loginView, verificar_cadastro)
 from comentarios.views import adicionar_comentario
-from noticia.views import NoticiaView, adicionarNoticia, listarNoticias, editar_noticia, excluir_noticia
+from noticia.views import Noticia, adicionarNoticia, listarNoticias
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", home, name='home'),
+    path("", home),
     path(
         'adicionar_comentario/',
         adicionar_comentario,
         name='adicionar_comentario'
     ),
     path("cadastro", cadastroUsuario),
-    path("login", loginView),
+    path("login/", loginView),
     path('listarNoticias', listarNoticias, name='listarNoticias'),
     path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),
-    path('listarNoticias/<int:pk>', NoticiaView.as_view(), name='noticia'),
+    path('listarNoticias/<int:pk>', Noticia.as_view(), name='noticia'),
     path('categoria/<str:categoria>', categorias),
     path('logado/', verificar_cadastro, name='logado'),
-    path('excluir_noticia/<int:pk>/', excluir_noticia, name='excluir_noticia'),
-    path('editar_noticia/<int:pk>/', editar_noticia, name='editar_noticia'),
-    path('logout/', logout_user, name='logout')
 ]
 
 urlpatterns += [
