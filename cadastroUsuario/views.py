@@ -13,26 +13,21 @@ from django.contrib.auth.models import User
 def home(request):  
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
+    contexto = {'ult_noticias': ult_noticia}
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user.email).first()
-        print('usuario User')
+        print('usuario User---------')
         print(usuario_dados.nome)
+        contexto['usuarios'] = usuario_dados
     if request.method == 'POST':
-        print('usuario User')
-        print(usuario_dados.nome)
-        # ult_noticia = fetchbuscarTag(request.POST.get('buscar-tag'))
+        ult_noticia = fetchbuscarTag(request.POST.get('buscar-tag'))
+        contexto['ult_noticias'] = ult_noticia
         # print('-----------------------------------------------------')
         # print(ult_noticia)
-        return render(request, 'categorias.html',
-                      {
-                        'ult_noticias': ult_noticia,
-                        'usuarios': usuario_dados
-                        })
-    contexto = {
-        'ult_noticias': ult_noticia,
-        'usuarios': usuario_dados.nome
-    }
+        return render(request, 'categorias.html', contexto)
+
+    print(contexto)
     return render(request, 'home.html', contexto)
 
 
@@ -68,6 +63,8 @@ def fetchUltimoRegistro():
 
 def fetchbuscarTag(buscar_tag):
     ult_noticia = []
+    print('______TAG_________')
+    print(buscar_tag)
     if buscar_tag:
         ult_noticia.extend(Noticia.objects.filter(
             titulo__icontains=buscar_tag
@@ -87,22 +84,29 @@ def tratarConteudo(ult_noticia):
 
 
 def categorias(request, categoria):
+    contexto = {}
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user.email).first()
         print('usuario User')
         print(usuario_dados.nome)
+        contexto['usuarios'] = usuario_dados
     noticias = Noticia.objects.filter(
         id_categoria__categoria__icontains=categoria
     )
     # print(noticias)
-    contexto = {
-        'ult_noticias': noticias,
-        'categoria': categoria,
-        'usuarios': usuario_dados
-    }
-
+    contexto['ult_noticias'] = noticias
+    contexto['categoria'] = categoria
+    # contexto = {
+    #     'ult_noticias': noticias,
+    #     'categoria': categoria,
+    # }
     return render(request, 'categorias.html', contexto)
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
+
 def verificar_cadastro(request):
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
@@ -115,12 +119,12 @@ def verificar_cadastro(request):
         print(usuario)
         usuario_dados = Cadastro.objects.filter(email=email).first()
         print('usuario Cad')
-        print(usuario_dados)
+        print(usuario_dados.nome)
         # Verifica se existe um usuário com o email fornecido
         if usuario:
             print('Login-------------')
             print(login(request, usuario))
-            return render(request, 'home.html', {'usuarios': usuario_dados.nome, 'ult_noticias': ult_noticia})
+            return render(request, 'home.html', {'usuarios': usuario_dados, 'ult_noticias': ult_noticia})
         else:
             # Usuário não autenticado
             return HttpResponse("Usuário não autenticado!")
@@ -130,4 +134,4 @@ def verificar_cadastro(request):
         print('usuario User')
         print(user)
 
-    return render(request, 'home.html', {'usuarios': usuario_dados.nome, 'ult_noticias': ult_noticia})
+    return render(request, 'home.html', {'usuarios': usuario_dados, 'ult_noticias': ult_noticia})

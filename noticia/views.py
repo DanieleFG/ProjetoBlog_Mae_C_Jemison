@@ -18,17 +18,19 @@ from datetime import datetime
 def listarNoticias(request):
     noticias = Noticia.objects.all()
     # print(noticias)
+    contexto = {}
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user.email).first()
         print('usuario User')
         print(usuario_dados.nome)
+        contexto = {'usuarios':  usuario_dados}
         if user.is_staff:
             noticias = Noticia.objects.all()
         else:
             noticias = Noticia.objects.filter( id_autor__autor__icontains=usuario_dados.nome)
     return render(request, 'noticia/listarNoticias.html',
-                  {'noticias': noticias, 'usuarios': usuario_dados})
+                  {'noticias': noticias})
 
 
 def adicionarNoticia(request):
@@ -73,10 +75,9 @@ def editar_noticia(request, pk):
         form = NoticiaForm(instance=noticia)
     return render(request, 'noticia/adicionarNoticia.html', {'form': form, 'noticia': pk})
 
-class NoticiaView(LoginRequiredMixin,DetailView):
+class NoticiaView(DetailView):
     template_name = 'noticia.html'
     model = Noticia
-    login_url = reverse_lazy('login')  # Redireciona para a página de login
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
