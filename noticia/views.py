@@ -37,7 +37,7 @@ def adicionarNoticia(request):
 
     if request.user.is_authenticated:
         user = request.user
-        usuario_dados = Cadastro.objects.filter(email=user).first()
+        usuario_dados = Cadastro.objects.filter(email=user.email).first()
         print('usuario User')
         print(user)
     if request.method == 'POST':
@@ -59,7 +59,7 @@ def adicionarNoticia(request):
     return render(request, 'noticia/adicionarNoticia.html', 
                   {
                     'form': form,
-                    'usuarios': usuario_dados.nome
+                    'usuarios': usuario_dados
                     })
 
 def excluir_noticia(request, pk):
@@ -79,13 +79,15 @@ def editar_noticia(request, pk):
     else:
         form = NoticiaForm(instance=noticia)
     return render(request, 'noticia/adicionarNoticia.html', {'form': form, 'noticia': pk})
+
 class NoticiaView(DetailView):
     template_name = 'noticia.html'
     model = Noticia
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            context['usuarios'] = Cadastro.objects.filter(email=self.request.user).first()
+            context['usuarios'] = Cadastro.objects.filter(email=self.request.user.email).first()
+            print(context)
         return context
 
 
