@@ -62,6 +62,8 @@
               <a href="/cadastro" target="_blank" class="btn btn-secondary" > Cadastre-se </a>
               {% if not usuarios %}
               <a href="/login" target="_blank" class="btn btn-primary" > Login </a>
+              {%else%}
+              <a href="/listarNoticias"  class="btn btn-primary" >Interface Admin </a>
               {% endif %}
             </form>
           </div>

@@ -13,16 +13,25 @@ from django.contrib.auth.models import User
 def home(request):  
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
+    if request.user.is_authenticated:
+        user = request.user
+        usuario_dados = Cadastro.objects.filter(email=user.email).first()
+        print('usuario User')
+        print(usuario_dados.nome)
     if request.method == 'POST':
-        ult_noticia = fetchbuscarTag(request.POST.get('buscar-tag'))
-        print('-----------------------------------------------------')
-        print(ult_noticia)
+        print('usuario User')
+        print(usuario_dados.nome)
+        # ult_noticia = fetchbuscarTag(request.POST.get('buscar-tag'))
+        # print('-----------------------------------------------------')
+        # print(ult_noticia)
         return render(request, 'categorias.html',
                       {
-                        'ult_noticias': ult_noticia
+                        'ult_noticias': ult_noticia,
+                        'usuarios': usuario_dados
                         })
     contexto = {
-        'ult_noticias': ult_noticia
+        'ult_noticias': ult_noticia,
+        'usuarios': usuario_dados.nome
     }
     return render(request, 'home.html', contexto)
 
@@ -78,13 +87,19 @@ def tratarConteudo(ult_noticia):
 
 
 def categorias(request, categoria):
+    if request.user.is_authenticated:
+        user = request.user
+        usuario_dados = Cadastro.objects.filter(email=user.email).first()
+        print('usuario User')
+        print(usuario_dados.nome)
     noticias = Noticia.objects.filter(
         id_categoria__categoria__icontains=categoria
     )
-    print(noticias)
+    # print(noticias)
     contexto = {
         'ult_noticias': noticias,
-        'categoria': categoria
+        'categoria': categoria,
+        'usuarios': usuario_dados
     }
 
     return render(request, 'categorias.html', contexto)
