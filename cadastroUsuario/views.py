@@ -41,11 +41,13 @@ def cadastroUsuario(request):
     if form.is_valid():
         sucesso = True
         form.save()
+
     contexto = {
         'form': form,
         'sucesso': sucesso
     }
     return render(request, 'cadastroUsuario.html', contexto)
+
 
 
 def loginView(request):
