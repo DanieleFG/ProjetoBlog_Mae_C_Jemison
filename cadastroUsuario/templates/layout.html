@@ -123,11 +123,11 @@
     <h1 class="d-flex justify-content-center color_seriados">Lançamentos</h1>
     <br>
     <div class="row">
-      {% for noticia in lancamentos %}
+      {% for lancamento in lancamentos %}
       <div class="col-lg-4">
-          <img class="circle-image" src="/media/{{noticia.imagem}}" alt='noticia.titulo'>
-        <h2><a href="#" class="linkheading1">{{ noticia.categoria }}</a></h2>
-        <p>{{ noticia.titulo }}</p>
+        <img class="circle-image" src="/media/{{lancamento.imagem}}" alt='noticia.titulo'>
+        <h2><a href="#" class="linkheading1">{{ lancamento.categoria }}</a></h2>
+        <p>{{ lancamento.titulo }}</p>
       </div>
       {% endfor %}
     </div>

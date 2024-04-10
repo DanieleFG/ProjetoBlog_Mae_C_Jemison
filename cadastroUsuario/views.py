@@ -1,11 +1,9 @@
 import html
 
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.db import connection
+from django.contrib.auth import authenticate
 from django.db.models import Count
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import render
 
 from cadastroUsuario.form import CadastroUsuarioForm
 from cadastroUsuario.models import Cadastro
@@ -57,13 +55,14 @@ def fetchUltimoRegistro():
     ult_noticias_dict = []
 
     for categoria in categorias_aleatorias:
-        ult_noticia = Noticia.objects.filter(id_categoria=categoria.id).order_by('-id').first()
-
+        ult_noticia = Noticia.objects.filter(id_categoria=categoria.id)\
+            .order_by('-id').first()
+        
         if ult_noticia:
             ult_noticias_dict.append({
                 "categoria": ult_noticia.id_categoria,
                 "titulo": ult_noticia.titulo,
-                "imagem": ult_noticia.imagem
+                "imagem": ult_noticia.imagem,
             })
 
     return ult_noticias_dict
@@ -107,28 +106,29 @@ def verificar_cadastro(request):
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
     noticia_recente = fetchUltimoRegistro()
+
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
         usuario = authenticate(request, username=email, password=senha)
-        print('usuario auth')
-        print(usuario)
         usuario_dados = Cadastro.objects.filter(email=email).first()
-        print('usuario Cad')
-        print(usuario_dados)
-        # Verifica se existe um usuário com o email fornecido
+
         if usuario:
-            print('Login-------------')
-            print(login(request, usuario))
-            return render(request, 'home.html', {'usuarios': usuario_dados.nome, 'ult_noticias': ult_noticia, 'lancamentos': noticia_recente})
+            return render(request, 'home.html', {
+                'usuarios': usuario_dados.nome,
+                'ult_noticias': ult_noticia,
+                'lancamentos': noticia_recente}
+            )
         else:
-            # Usuário não autenticado
             return HttpResponse("Usuário não autenticado!")
+        
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user).first()
-        print('usuario User')
-        print(user)
 
-    return render(request, 'home.html', {'usuarios': usuario_dados.nome, 'ult_noticias': ult_noticia, 'lancamento': noticia_recente})
+    return render(request, 'home.html', {
+        'usuarios': usuario_dados.nome,
+        'ult_noticias': ult_noticia,
+        'lancamento': noticia_recente}
+    )
