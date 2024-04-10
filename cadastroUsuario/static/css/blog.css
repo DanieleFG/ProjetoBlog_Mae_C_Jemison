@@ -318,3 +318,20 @@ h1 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+.circle-image {
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50%;
+}
+
+.teste_unico > p {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.teste_unico > p > img{
+  width: 1100px !important;
+  height: auto !important;
+}

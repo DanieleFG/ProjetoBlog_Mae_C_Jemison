@@ -11,12 +11,9 @@ class NoticiaForm(forms.ModelForm):
 
     class Meta:
         model = Noticia
-        fields = ['titulo', 'conteudo']
+        fields = ['titulo', 'conteudo', 'imagem', 'id_autor', 'id_categoria']
         widgets = {
-            "conteudo": CKEditor5Widget(
-                attrs={"class": "django_ckeditor_5"},
-                config_name="comment"
-            )
+            'conteudo': CKEditor5Widget(config_name='extends')
         }
 
 

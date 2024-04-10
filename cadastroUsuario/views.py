@@ -1,27 +1,38 @@
 import html
 
+from django.http import HttpResponse
 from django.db import connection
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.db.models import Count
+from django.shortcuts import render, redirect, get_object_or_404
+from noticia.models import Categoria, Noticia
+from django.contrib.auth.models import User
 
 from cadastroUsuario.form import CadastroUsuarioForm
-from noticia.models import Noticia
+from cadastroUsuario.models import Cadastro
 
 
-def home(request):  
+def home(request): 
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
+    noticia_recente = fetchUltimoRegistro()
+    contexto = {'ult_noticias': ult_noticia}
+    contexto['lancamentos'] = noticia_recente
+    if request.user.is_authenticated:
+        user = request.user
+        usuario_dados = Cadastro.objects.filter(email=user.email).first()
+        print('usuario User---------')
+        print(usuario_dados.nome)
+        contexto['usuarios'] = usuario_dados
     if request.method == 'POST':
         ult_noticia = fetchbuscarTag(request.POST.get('buscar-tag'))
-        print('-----------------------------------------------------')
-        print(ult_noticia)
-        return render(request, 'categorias.html',
-                      {
-                        'ult_noticias': ult_noticia
-                        })
-    contexto = {
-        'ult_noticias': ult_noticia
-    }
-    return render(request, 'home.html', contexto)
+        contexto['ult_noticias'] = ult_noticia
+        # print('-----------------------------------------------------')
+        # print(ult_noticia)
+        return render(request, 'categorias.html', contexto)
+
+    print(contexto)
+    return render(request, 'home.html', contexto) 
 
 
 def cadastroUsuario(request):
@@ -30,6 +41,7 @@ def cadastroUsuario(request):
     if form.is_valid():
         sucesso = True
         form.save()
+
     contexto = {
         'form': form,
         'sucesso': sucesso
@@ -37,21 +49,34 @@ def cadastroUsuario(request):
     return render(request, 'cadastroUsuario.html', contexto)
 
 
-def login(request):
+
+def loginView(request):
     return render(request, 'login.html')
 
 
 def fetchUltimoRegistro():
-    with connection.cursor() as cursor:
-        cursor.execute(""" SELECT * FROM noticia_noticia
-                    ORDER BY id DESC limit 4;""")
-        ult_noticia = cursor.fetchall()
+
+    categorias_com_noticias = Categoria.objects.annotate(
+        num_noticias=Count('noticia'))
+    categorias_com_noticias = categorias_com_noticias.filter(
+        num_noticias__gt=0)
+    categorias_aleatorias = categorias_com_noticias.order_by('?')[:3]
+
+    ult_noticias_dict = []
+
+    for categoria in categorias_aleatorias:
+        ult_noticia = Noticia.objects.filter(id_categoria=categoria.id)\
+            .order_by('-id').first()
+        
         if ult_noticia:
-            columns = [col[0] for col in cursor.description]
-            ult_noticias_dicts = [
-                dict(zip(columns, noticia)) for noticia in ult_noticia
-            ]
-        return ult_noticias_dicts
+            ult_noticias_dict.append({
+                "categoria": ult_noticia.id_categoria,
+                "titulo": ult_noticia.titulo,
+                "imagem": ult_noticia.imagem,
+                "pk": ult_noticia.pk
+            })
+            
+    return ult_noticias_dict
 
 
 def fetchbuscarTag(buscar_tag):
@@ -75,13 +100,56 @@ def tratarConteudo(ult_noticia):
 
 
 def categorias(request, categoria):
+    contexto = {}
+    if request.user.is_authenticated:
+        user = request.user
+        usuario_dados = Cadastro.objects.filter(email=user.email).first()
+        print('usuario User')
+        print(usuario_dados.nome)
+        contexto['usuarios'] = usuario_dados
     noticias = Noticia.objects.filter(
         id_categoria__categoria__icontains=categoria
     )
-    print(noticias)
-    contexto = {
-        'ult_noticias': noticias,
-        'categoria': categoria
-    }
+    noticia_recente = fetchUltimoRegistro()
+    contexto['ult_noticias'] = noticias
+    contexto['categoria'] = categoria
+    contexto['lancamentos'] = noticia_recente
 
     return render(request, 'categorias.html', contexto)
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
+
+def verificar_cadastro(request):
+    ult_noticia = Noticia.objects.all()
+    ult_noticia = tratarConteudo(ult_noticia)
+    noticia_recente = fetchUltimoRegistro()
+    
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+
+        usuario = authenticate(request, username=email, password=senha)
+        if usuario:
+            print('Login-------------')
+            print(login(request, usuario))
+            user = request.user
+            usuario_dados = Cadastro.objects.filter(email=user.email).first()
+            print(usuario_dados)
+            return render(request, 'home.html', {'usuarios': usuario_dados, 'lancamentos': noticia_recente, 'ult_noticias': ult_noticia})
+        elif request.POST.get('buscar-tag'):
+             ult_noticia = fetchbuscarTag(request.POST.get('buscar-tag'))
+             contexto = {'ult_noticias' : ult_noticia }
+             return render(request, 'categorias.html', contexto)
+        else:
+            return HttpResponse("Usuário não autenticado!") 
+    if request.user.is_authenticated:
+        user = request.user
+        usuario_dados = Cadastro.objects.filter(email=user).first()
+
+    return render(request, 'home.html', {
+        'usuarios': usuario_dados.nome,
+        'ult_noticias': ult_noticia,
+        'lancamento': noticia_recente}
+    )

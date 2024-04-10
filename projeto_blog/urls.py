@@ -19,24 +19,31 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from cadastroUsuario.views import cadastroUsuario, categorias, home, login
+from cadastroUsuario.views import (cadastroUsuario, categorias, home,
+                                   loginView, verificar_cadastro, logout_user)
 from comentarios.views import adicionar_comentario
-from noticia.views import Noticia, adicionarNoticia, listarNoticias
+from noticia.views import (NoticiaView, adicionarNoticia, editar_noticia,
+                           listarNoticias, excluir_noticia)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", home),
+    path("", home, name='home'),
     path(
         'adicionar_comentario/',
         adicionar_comentario,
         name='adicionar_comentario'
     ),
-    path("cadastro", cadastroUsuario),
-    path("login", login),
+    path("cadastro/", cadastroUsuario),
+    path("login/", loginView),
     path('listarNoticias', listarNoticias, name='listarNoticias'),
     path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),
-    path('listarNoticias/<int:pk>', Noticia.as_view(), name='noticia'),
-    path('categoria/<str:categoria>', categorias)
+    path('listarNoticias/<int:pk>', NoticiaView.as_view(), name='noticia'),
+    path('categoria/<str:categoria>', categorias),
+    path('logado/', verificar_cadastro, name='logado'),
+    path('excluir_noticia/<int:pk>/', excluir_noticia, name='excluir_noticia'),
+    path('editar_noticia/<int:pk>/', editar_noticia, name='editar_noticia'),
+    path('logout/', logout_user, name='logout')
+    
 ]
 
 urlpatterns += [
