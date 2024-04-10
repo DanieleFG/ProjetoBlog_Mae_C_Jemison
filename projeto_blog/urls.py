@@ -19,7 +19,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from cadastroUsuario.views import cadastroUsuario, categorias, home, loginView, verificar_cadastro
+from cadastroUsuario.views import (cadastroUsuario, categorias, home,
+                                   loginView, verificar_cadastro)
 from comentarios.views import adicionar_comentario
 from noticia.views import Noticia, adicionarNoticia, listarNoticias
 
@@ -32,7 +33,7 @@ urlpatterns = [
         name='adicionar_comentario'
     ),
     path("cadastro", cadastroUsuario),
-    path("login", loginView),
+    path("login/", loginView),
     path('listarNoticias', listarNoticias, name='listarNoticias'),
     path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),
     path('listarNoticias/<int:pk>', Noticia.as_view(), name='noticia'),

@@ -120,58 +120,26 @@
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
   <div class="container marketing">
-
-    <!-- Three columns of text below the carousel -->
     <h1 class="d-flex justify-content-center color_seriados">Lançamentos</h1>
     <br>
     <div class="row">
+      {% for noticia in lancamentos %}
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-        <h2><a href="#" class="linkheading1">Filmes</a></h2>
-        <p>Duna 2 nos cinemas</p>
-        
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-        <h2><a href="#" class="linkheading1">Séries</a></h2>
-        <p>Parasyte no Netflix</p>
-        
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-        <h2><a href="#" class="linkheading1">Games</a></h2>
-        <p>Alan Wake 2</p>
-        
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-
-
-    <!-- START THE FEATURETTES -->
-
-   
-
-    <!-- /END THE FEATURETTES -->
-
-  </div><!-- /.container -->
-
-  
-  <!--Parte final de blog-->
-  
+          <img class="circle-image" src="/media/{{noticia.imagem}}" alt='noticia.titulo'>
+        <h2><a href="#" class="linkheading1">{{ noticia.categoria }}</a></h2>
+        <p>{{ noticia.titulo }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
   <div class="row g-5">
     <div class="col-md-8">
      {% block posts %} {%endblock%}
      {%block posts2 %} {%endblock%}
-
     </div>
-
     <div class="col-md-4">
-      
     </div>
   </div>
-
 </main>
 
    

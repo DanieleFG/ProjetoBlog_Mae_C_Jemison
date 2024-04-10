@@ -1,18 +1,18 @@
-from django.shortcuts import redirect, render
-from django.views.generic import DetailView
+import os
+from datetime import datetime
+from random import sample
 
-from .form import NoticiaForm
-from .models import Noticia
+from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import DetailView
+from PIL import Image
+
 from cadastroUsuario.models import Cadastro
 
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from PIL import Image
-import os
-from django.conf import settings
-from datetime import datetime
-
-
+from .form import NoticiaForm
+from .models import Categoria, Noticia
 
 
 def listarNoticias(request):
@@ -56,7 +56,7 @@ def adicionarNoticia(request):
 class Noticia(LoginRequiredMixin,DetailView):
     template_name = 'noticia.html'
     model = Noticia
-    login_url = reverse_lazy('login')  # Redireciona para a página de login
+    login_url = reverse_lazy('login')  
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:

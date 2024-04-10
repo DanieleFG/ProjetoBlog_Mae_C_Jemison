@@ -318,3 +318,12 @@ h1 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+
+
+
+.circle-image {
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50%;
+}
