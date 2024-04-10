@@ -1,20 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Notícias</title>
-</head>
-
-<body>
-    
+{% extends "base.html" %}
+{% block content %}   
+<div class="container text-white">
     <h1>Lista de Notícias</h1>
-    <ul>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+              <th scope="col">Noticias</th>
+              <th scope="col">Data</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
         {% for noticia in noticias %}
-        <li>{{ noticia.titulo }} - {{ noticia.data_publicacao }}</li>
+        <tr>
+            <td>
+                <a href="{%  url 'noticia' noticia.pk %}" class="text-white">{{ noticia.titulo }}</a>
+            </td>
+            <td>
+                 {{ noticia.data_publicacao|date:"d-m-Y H:i:s" }}
+            </td>
+            <td>
+                <a href="{%  url 'excluir_noticia' noticia.pk %}" onclick="return confirm('Tem certeza que deseja excluir esta notícia?');" class="btn btn-danger">DELETE</a>
+            </td>
+            <td>
+                <a href="{%  url 'editar_noticia' noticia.pk %}" class="btn btn-info">EDIT</a>
+            </td>
+        </tr>
         {% endfor %}
-    </ul>
-    <a href="{% url 'adicionarNoticia' %}">Adicionar Notícia</a>
-</body>
+    </table>
+    <br>
+    <br>
+    <a class="btn btn-success" href="{% url 'adicionarNoticia' %}">Adicionar Notícia</a>
+    <br>
+    <br>
+</div>
 
-</html>
+{% endblock %}
