@@ -9,6 +9,7 @@ pyvenv.cfg
 # Compiled Python files
 *.pyc
 __pycache__/
+__pycache__
 
 # Database
 
