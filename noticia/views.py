@@ -29,9 +29,8 @@ def listarNoticias(request):
             noticias = Noticia.objects.all()
         else:
             noticias = Noticia.objects.filter( id_autor__autor__icontains=usuario_dados.nome)
-    contexto['noticias']= noticias
     return render(request, 'noticia/listarNoticias.html',
-                  contexto)
+                  {'noticias': noticias})
 
 
 def adicionarNoticia(request):
@@ -56,7 +55,7 @@ def adicionarNoticia(request):
             return redirect('listarNoticias')
     else:
         form = NoticiaForm()
-    return render(request, 'noticia/adicionarNoticia.html', {'form': form, 'usuarios': usuario_dados})
+    return render(request, 'noticia/adicionarNoticia.html', {'form': form, 'usuarios': usuario_dados.nome})
 
 def excluir_noticia(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)

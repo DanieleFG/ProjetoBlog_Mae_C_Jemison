@@ -1,16 +1,15 @@
 import html
 
-from django.contrib.auth import authenticate , login, logout
+from django.contrib.auth import authenticate
 from django.db.models import Count
 from django.http import HttpResponse
 from django.db import connection
-from django.shortcuts import render,  redirect, get_object_or_404
+from django.shortcuts import render
 
 from cadastroUsuario.form import CadastroUsuarioForm
+from noticia.models import Noticia
 from cadastroUsuario.models import Cadastro
 from noticia.models import Categoria, Noticia
-from django.contrib.auth.models import User
-
 
 
 def home(request):  
@@ -50,7 +49,9 @@ def cadastroUsuario(request):
     return render(request, 'cadastroUsuario.html', contexto)
 
 
-def loginView(request):   
+def loginView(request):
+    print('entour')
+    exit()
     return render(request, 'login.html')
 
 
@@ -121,24 +122,19 @@ def verificar_cadastro(request):
         senha = request.POST.get('senha')
 
         usuario = authenticate(request, username=email, password=senha)
+        print('usuario auth')
+        print(usuario)
+        usuario_dados = Cadastro.objects.filter(email=email).first()
+        print('usuario Cad')
+        print(usuario_dados.nome)
+        # Verifica se existe um usuário com o email fornecido
         if usuario:
-            print('usuario auth')
-            print(usuario)
-            usuario_dados = Cadastro.objects.filter(email=email).first()
-            print('usuario Cad')
-            print(usuario_dados.nome)
-            # Verifica se existe um usuário com o email fornecido
-            if usuario:
-                print('Login-------------')
-                print(login(request, usuario))
-                return render(request, 'home.html', {'usuarios': usuario_dados, 'ult_noticias': ult_noticia})
-            else:
-                # Usuário não autenticado
-                return HttpResponse("Usuário não autenticado!")
+            print('Login-------------')
+            print(login(request, usuario))
+            return render(request, 'home.html', {'usuarios': usuario_dados, 'lancamentos': noticia_recente, 'ult_noticias': ult_noticia})
         else:
             # Usuário não autenticado
             return HttpResponse("Usuário não autenticado!")
-        
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user).first()
