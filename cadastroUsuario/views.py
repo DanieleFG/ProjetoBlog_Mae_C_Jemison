@@ -13,6 +13,7 @@ from noticia.models import Categoria, Noticia
 def home(request):  
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
+ 
     noticia_recente = fetchUltimoRegistro()
     print(noticia_recente)
     if request.method == 'POST':
@@ -63,8 +64,9 @@ def fetchUltimoRegistro():
                 "categoria": ult_noticia.id_categoria,
                 "titulo": ult_noticia.titulo,
                 "imagem": ult_noticia.imagem,
+                "pk": ult_noticia.pk
             })
-
+            
     return ult_noticias_dict
 
 
@@ -106,14 +108,14 @@ def verificar_cadastro(request):
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
     noticia_recente = fetchUltimoRegistro()
-
+    
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
         usuario = authenticate(request, username=email, password=senha)
         usuario_dados = Cadastro.objects.filter(email=email).first()
-
+    
         if usuario:
             return render(request, 'home.html', {
                 'usuarios': usuario_dados.nome,
@@ -126,6 +128,8 @@ def verificar_cadastro(request):
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user).first()
+
+        
 
     return render(request, 'home.html', {
         'usuarios': usuario_dados.nome,
