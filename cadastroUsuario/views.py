@@ -31,16 +31,15 @@ def home(request):
 
 
 def cadastroUsuario(request):
-    sucesso = False
+
     form = CadastroUsuarioForm(request.POST or None)
     if form.is_valid():
-        sucesso = True
         form.save()
+
     contexto = {
         'form': form,
-        'sucesso': sucesso
     }
-    return render(request, 'cadastroUsuario.html', contexto)
+    return render(request, 'login.html', contexto)
 
 
 def loginView(request):
