@@ -33,7 +33,7 @@ urlpatterns = [
         adicionar_comentario,
         name='adicionar_comentario'
     ),
-    path("cadastro", cadastroUsuario),
+    path("cadastro/", cadastroUsuario),
     path("login/", loginView),
     path('listarNoticias', listarNoticias, name='listarNoticias'),
     path('adicionarNoticia/', adicionarNoticia, name='adicionarNoticia'),

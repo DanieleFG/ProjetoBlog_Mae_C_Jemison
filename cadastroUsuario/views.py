@@ -34,11 +34,8 @@ def cadastroUsuario(request):
     form = CadastroUsuarioForm(request.POST or None)
     if form.is_valid():
         form.save()
-
-    contexto = {
-        'form': form,
-    }
-    return render(request, 'login.html', contexto)
+        return render(request, 'login.html')
+    return render(request, 'cadastroUsuario.html', {'form': form})
 
 
 def loginView(request):
