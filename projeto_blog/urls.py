@@ -22,7 +22,8 @@ from django.urls import include, path
 from cadastroUsuario.views import (cadastroUsuario, categorias, home,
                                    loginView, verificar_cadastro)
 from comentarios.views import adicionar_comentario
-from noticia.views import Noticia, adicionarNoticia, listarNoticias
+from noticia.views import (Noticia, adicionarNoticia, editar_noticia,
+                           listarNoticias)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -39,6 +40,8 @@ urlpatterns = [
     path('listarNoticias/<int:pk>', Noticia.as_view(), name='noticia'),
     path('categoria/<str:categoria>', categorias),
     path('logado/', verificar_cadastro, name='logado'),
+    path('excluir_noticia/<int:pk>/', '', name='excluir_noticia'),
+    path('editar_noticia/<int:pk>/', editar_noticia, name='editar_noticia'),
 ]
 
 urlpatterns += [

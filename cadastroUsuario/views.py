@@ -15,7 +15,6 @@ def home(request):
     ult_noticia = tratarConteudo(ult_noticia)
  
     noticia_recente = fetchUltimoRegistro()
-    print(noticia_recente)
     if request.method == 'POST':
         ult_noticia = fetchbuscarTag(request.POST.get('buscar-tag'))
         return render(request, 'categorias.html',
@@ -48,8 +47,10 @@ def loginView(request):
 
 def fetchUltimoRegistro():
 
-    categorias_com_noticias = Categoria.objects.annotate(num_noticias=Count('noticia'))
-    categorias_com_noticias = categorias_com_noticias.filter(num_noticias__gt=0)
+    categorias_com_noticias = Categoria.objects.annotate(
+        num_noticias=Count('noticia'))
+    categorias_com_noticias = categorias_com_noticias.filter(
+        num_noticias__gt=0)
     categorias_aleatorias = categorias_com_noticias.order_by('?')[:3]
 
     ult_noticias_dict = []
@@ -127,8 +128,6 @@ def verificar_cadastro(request):
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user).first()
-
-        
 
     return render(request, 'home.html', {
         'usuarios': usuario_dados.nome,
