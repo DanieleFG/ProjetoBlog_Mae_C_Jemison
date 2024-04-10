@@ -62,27 +62,7 @@ body {
 }
 
 /* Botão Login */
-.btn-primary{
-  font-weight: 400;
-  line-height: 1.5;
-  color: #dee9f3;
-  background-color: #575454;
-  border: 1px solid #ced4da;
-  position: absolute;
-  top: 10px; /* distância do topo */
-  right: 200px; /* distância da direita */
-}
-/* Botão Cadastre-se */
-.btn-secondary{
-  font-weight: 400;
-  line-height: 1.5;
-  color: #dee9f3;
-  border: 1px solid #ced4da;
-  background-color: #575454;
-  position: absolute;
-  top: 10px; /* distância do topo */
-  right: 60px; /* distância da direita */
-}
+
 /* Botão Search */
 .btn-outline-success {
   font-weight: 400;
@@ -239,7 +219,7 @@ h1 {
     font-size: 3rem;
   }
 }
-
+/* 
 .nav-scroller {
   position: relative;
   z-index: 2;
@@ -262,7 +242,7 @@ h1 {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: .875rem;
-}
+} */
 
 
 
