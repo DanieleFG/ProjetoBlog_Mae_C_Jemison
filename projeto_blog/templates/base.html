@@ -61,28 +61,11 @@
           </form>
          
       </div>
-      <div >
-        <form class="d-flex  justify-content-end" >
-
-            <a href="/cadastro"  class="btn btn-secondary me-4" >Cadastrar-se</i> </a>
-            {% if not usuarios %}
-            <a href="/login"  class="btn btn-primary" >Login</a>
-            {%else%}
-            <a href="/listarNoticias" class="btn btn-primary me-4" >Admin</i></a>
-            <a href="{% url 'logout' %}" class="fs-4 ps-4 pe-4 text-white" ><i class="bi bi-box-arrow-left"></i></a>
-            {% endif %}
-        </form>
-        
+      <div >        
       </div>
       </div>
     </nav>
-
-    {% if  usuarios %}
-    <div class="text-white" >
-     <h4 class="text-white"> Bem-vindo, {{ usuarios.nome }}!</h4>
-    </div>
-  
-     {% endif %}
+    
     <!--Logo do site-->
     <div class="imagem-logo " >
       <img src="/static/img/PontoGeek_logo.png" class="rounded mx-auto d-block" alt="" width="350px" height="250px">

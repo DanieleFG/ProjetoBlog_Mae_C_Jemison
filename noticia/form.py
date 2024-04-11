@@ -11,15 +11,10 @@ class NoticiaForm(forms.ModelForm):
 
     class Meta:
         model = Noticia
-<<<<<<< Updated upstream
         fields = ['titulo', 'conteudo', 'imagem', 'id_autor', 'id_categoria']
         widgets = {
             'conteudo': CKEditor5Widget(attrs={"class": "django_ckeditor_5", "rows": 10}, config_name='extends')
         }
-=======
-        fields = ["titulo", "conteudo", "imagem", "id_autor", "id_categoria"]
-        widgets = {"conteudo": CKEditor5Widget(config_name="extends")}
->>>>>>> Stashed changes
 
 
 class CategotiaForm(forms.ModelForm):
