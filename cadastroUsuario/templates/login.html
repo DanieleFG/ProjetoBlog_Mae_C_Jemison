@@ -36,7 +36,9 @@
   <body class="text-center">
 <main class="form-signin">
   {% if erro_login %}
-    <p>{{ erro_login }}</p>
+    <div class="alert alert-danger" role="alert">
+        {{ erro_login }}
+    </div>
   {% endif %}
   <form action="{% url 'logado' %}" method="POST" id="login-form" novalidate>
     {% csrf_token %}

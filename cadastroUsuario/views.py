@@ -1,12 +1,10 @@
 import html
 
-from django.http import HttpResponse
-from django.db import connection
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Count
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from noticia.models import Categoria, Noticia
-from django.contrib.auth.models import User
+
 
 from cadastroUsuario.form import CadastroUsuarioForm
 from cadastroUsuario.models import Cadastro
@@ -36,6 +34,9 @@ def home(request):
 
 
 def cadastroUsuario(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     sucesso = False
     form = CadastroUsuarioForm(request.POST or None)
     if form.is_valid():
@@ -47,6 +48,8 @@ def cadastroUsuario(request):
 
 
 def loginView(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     return render(request, "login.html")
 
 
@@ -122,16 +125,28 @@ def verificar_cadastro(request):
     if request.method == "POST":
         email = request.POST.get("email")
         senha = request.POST.get("senha")
-
+        noticia_recente = fetchUltimoRegistro()
         usuario = authenticate(request, username=email, password=senha)
+
         if usuario:
             login(request, usuario)
-            return redirect('logado')
+            user = request.user
+            usuario_dados = Cadastro.objects.filter(email=user.email).first()
+            return render(
+                request,
+                "home.html",
+                {
+                    "usuarios": usuario_dados,
+                    "lancamentos": noticia_recente,
+                    "ult_noticias": ult_noticia,
+                },
+            )
         
         elif request.POST.get("buscar-tag"):
             ult_noticia = fetchbuscarTag(request.POST.get("buscar-tag"))
-            return render(request, "categorias.html", contexto)
+            contexto = {"ult_noticias": ult_noticia}
+            return render(request, "categorias.html")
+        
         else:
             contexto = {"erro_login": "Usuário não autenticado!"}
             return render(request, "login.html", contexto)
-    return HttpResponse('deu ruim')
