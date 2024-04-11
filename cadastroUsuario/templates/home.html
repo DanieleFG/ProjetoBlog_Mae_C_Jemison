@@ -41,22 +41,27 @@
 
 {%endblock %}
 
-{% block posts %}
-{% for ult_noticia in ult_noticias|slice:"3:"  %}
-  {% if forloop.counter <= 3 %}
-    <hr class="featurette-divider">
-    <div class="row featurette">
-      <div class="col-md-7">
-        <h2><a href="{%  url 'noticia' ult_noticia.pk %}" class="featurette-heading text-white">{{ ult_noticia.titulo|slice:":50" }}...</a> <br><span class="text-muted">{{ ult_noticia.data_publicacao }}</span></h2>
-        <p class="lead">{{ ult_noticia.conteudo|striptags|slice:":100" }}...</p>
+<div class="container"> <!-- Adicione uma classe de contêiner -->
+  {% block posts %}
+  {% for ult_noticia in ult_noticias|slice:"3:"  %}
+    {% if forloop.counter <= 3 %}
+      <hr class="featurette-divider">
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2><a href="{%  url 'noticia' ult_noticia.pk %}" class="featurette-heading text-white">{{ ult_noticia.titulo|slice:":50" }}...</a> <br><span class="text-muted">{{ ult_noticia.data_publicacao }}</span></h2>
+          <p class="lead">{{ ult_noticia.conteudo|striptags|slice:":100" }}...</p>
+        </div>
+        <div class="col-md-5">
+          <div style="width: 300px; height: 250px; overflow: hidden;">
+            <img src="/media/{{ ult_noticia.imagem }}" class="rounded-circle bd-placeholder-img bd-placeholder-img-lg featurette-image mx-auto" style="width: 100%; height: 100%; object-fit: cover;" alt="image_noticia">
+          </div>
+        </div>
       </div>
-      <div class="col-md-5">
-        <img src="/media/{{ult_noticia.imagem}}" class="rounded-circle bd-placeholder-img bd-placeholder-img-lg featurette-image mx-auto" width="300" height="250" alt="image_noticia">
-      </div>
-    </div>
-  {% endif %}
-{%endfor%}
-{% endblock%}
+    {% endif %}
+  {% endfor %}
+  {% endblock %}
+</div>
+
 
 {%block posts2 %}
 
@@ -65,8 +70,8 @@
 {% for ult_noticia in ult_noticias|slice:"6:"  %}
 <article class="blog-post">
   <div style="display:flex;  align-items: center;">
-    <div style="width:150px; height:80px; overflow-y: hidden; border-radius: 15px 50px;" >
-      <img src="/media/{{ult_noticia.imagem}}" style="float: left; margin-right: 20px;" width="250" alt="image_noticia">
+    <div>
+      <img src="/media/{{ult_noticia.imagem}}" style="width: 150px; height: 150px; object-fit: cover;  border-radius: 30%; overflow: hidden;" alt="image_noticia">
     </div>
     <div style=" flex: 1; margin: 20px;">
       <h4 class="text-white"><a href="{% url 'noticia' ult_noticia.pk %}" class="text-white text-decoration-none">{{ ult_noticia.titulo|slice:":50" }}...</a></h4>

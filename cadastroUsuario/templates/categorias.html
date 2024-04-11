@@ -7,8 +7,8 @@
 {% for noticia in ult_noticias %}
 <article class="blog-post">
   <div style="display:flex;  align-items: center;"> {{ult_noticia}}
-    <div style="width:150px; height:80px; overflow-y: hidden; border-radius: 15px 50px;" >
-      <img src="/media/{{noticia.imagem}}" style="float: left; margin-right: 20px;" width="250" alt="image_noticia">
+    <div>
+      <img src="/media/{{noticia.imagem}}" style=" margin-right: 20px; object-fit: cover; border-radius: 30%;" width="250px" height='200px' alt="image_noticia">
     </div>
     <div style=" flex: 1; margin: 20px;">
       <h4 class="text-white"><a href="{% url 'noticia' noticia.pk %}" class="text-white text-decoration-none">{{ noticia.titulo|slice:":50" }}...</a></h4>
@@ -19,7 +19,7 @@
 {% endfor %}
 {% else %}
   <div class="container"> 
-    <h3 class="text-white">Nenhum resultado encontrado para a busca</h3>
+    <h3 class="text-white" style='text-align: center;'>Nenhum resultado encontrado para a busca</h3>
   </div>
 {% endif %}
 
