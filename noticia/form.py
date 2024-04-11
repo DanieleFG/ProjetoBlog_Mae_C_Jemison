@@ -13,7 +13,7 @@ class NoticiaForm(forms.ModelForm):
         model = Noticia
         fields = ['titulo', 'conteudo', 'imagem', 'id_autor', 'id_categoria']
         widgets = {
-            'conteudo': CKEditor5Widget(config_name='extends')
+            'conteudo': CKEditor5Widget(attrs={"class": "django_ckeditor_5", "rows": 10}, config_name='extends')
         }
 
 
