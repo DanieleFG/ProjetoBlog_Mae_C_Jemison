@@ -1,26 +1,60 @@
 {% extends "base.html" %}
 
-{%block content %}
-
+{% block content %}
 <hr class="featurette-divider">
 {% if ult_noticias %}
 {% for noticia in ult_noticias %}
 <article class="blog-post">
-  <div style="display:flex;  align-items: center;"> {{ult_noticia}}
+  <div style="display:flex;  align-items: center;">
     <div>
-      <img src="/media/{{noticia.imagem}}" style=" margin-right: 20px; object-fit: cover; border-radius: 30%;" width="250px" height='200px' alt="image_noticia">
+      <img src="/media/{{ noticia.imagem }}" style="margin-right: 20px; object-fit: cover; border-radius: 30%;" width="250px" height="200px" alt="image_noticia">
     </div>
-    <div style=" flex: 1; margin: 20px;">
+    <div style="flex: 1; margin: 20px;">
       <h4 class="text-white"><a href="{% url 'noticia' noticia.pk %}" class="text-white text-decoration-none">{{ noticia.titulo|slice:":50" }}...</a></h4>
-      <p class="blog-post-meta">{{ noticia.data_publicacao }} 
+      <p class="blog-post-meta">{{ noticia.data_publicacao }}</p>
     </div>
   </div>     
 </article>
 {% endfor %}
-{% else %}
-  <div class="container"> 
-    <h3 class="text-white" style='text-align: center;'>Nenhum resultado encontrado para a busca</h3>
-  </div>
+
+<!-- Paginação -->
+{% if ult_noticias.has_other_pages %}
+  <ul class="pagination justify-content-center">
+    {% if ult_noticias.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ ult_noticias.previous_page_number }}">Anterior</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Anterior</span>
+      </li>
+    {% endif %}
+    {% for num in ult_noticias.paginator.page_range %}
+      {% if ult_noticias.number == num %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">{{ num }}</span>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if ult_noticias.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ ult_noticias.next_page_number }}">Próxima</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Próxima</span>
+      </li>
+    {% endif %}
+  </ul>
 {% endif %}
 
-{%endblock%}
+{% else %}
+<div class="container"> 
+  <h3 class="text-white" style="text-align: center;">Nenhum resultado encontrado para a busca</h3>
+</div>
+{% endif %}
+{% endblock %}

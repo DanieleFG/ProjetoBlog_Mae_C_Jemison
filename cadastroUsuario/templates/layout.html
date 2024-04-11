@@ -63,13 +63,12 @@
             <input class="form-control me-2"  name="buscar-tag" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-         
       </div>
       <div>
         <form class="d-flex  justify-content-end">
             {% if not usuarios %}
-            <a href="/login" class="btn btn-primary">Login</a>
-            <a href="/cadastro" class="btn btn-secondary me-4">Cadastrar-se</a>
+            <a href="/login" class="btn btn-primary me-2">Login</a>
+            <a href="/cadastro" class="btn btn-secondary">Cadastrar-se</a>
             {% else %}
                 {% if user.is_staff %}
                 <a href="/listarNoticias" class="btn btn-primary me-4">Gerênciar Noticias</a>
@@ -149,7 +148,7 @@
   <div class="row g-5">
     <div>
      {% block posts %} {%endblock%}
-     {%block posts2 %} {%endblock%}
+     {% block posts2 %} {%endblock%}
     </div>
   </div>
 </main>
