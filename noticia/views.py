@@ -49,11 +49,13 @@ def adicionarNoticia(request):
             ext = file.name.split(".")[-1]
             today = datetime.now().strftime("%Y%m%d%H%M%S")
             filename = f"img_{today}.{ext}"
+            # settings.MEDIA_ROOT = settings.MEDIA_ROOT.replace("\", '/')
             path = os.path.join(settings.MEDIA_ROOT, "uploads/noticias", filename)
             img.save(path)
-            noticia.imagem = os.path.join(
-                "uploads/noticias", filename
-            )  # Salva o caminho no banco
+            path_image = os.path.join("uploads/noticias", filename)
+            if path_image.find("\\") != -1:
+                path_image = os.path.join("uploads/noticias", filename).replace("\\", "/")
+            noticia.imagem = path_image # Salva o caminho no banco
             noticia.save()  # Agora sim, salva no banco
             return redirect("listarNoticias")
     else:
