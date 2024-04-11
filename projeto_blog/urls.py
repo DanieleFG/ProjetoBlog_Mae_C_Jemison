@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.auth.decorators import login_required
 
 from cadastroUsuario.views import (
     cadastroUsuario,
@@ -39,21 +40,16 @@ from noticia.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home, name="home"),
-    path("adicionar_comentario/", adicionar_comentario, name="adicionar_comentario"),
+    path("adicionar_comentario/", login_required(adicionar_comentario), name="adicionar_comentario"),
     path("cadastro/", cadastroUsuario),
-    path("login/", loginView),
-    path("listarNoticias", listarNoticias, name="listarNoticias"),
-    path("adicionarNoticia/", adicionarNoticia, name="adicionarNoticia"),
-    path("listarNoticias/<int:pk>", NoticiaView.as_view(), name="noticia"),
+    path("login/", loginView, name='login'),
+    path("listarNoticias/", login_required(listarNoticias), name="listarNoticias"),
+    path("adicionarNoticia/", login_required(adicionarNoticia), name="adicionarNoticia"),
+    path("listarNoticias/<int:pk>/", login_required(NoticiaView.as_view()), name="noticia"),
     path("categoria/<str:categoria>", categorias),
     path("logado/", verificar_cadastro, name="logado"),
-    path("excluir_noticia/<int:pk>/", excluir_noticia, name="excluir_noticia"),
-    path("editar_noticia/<int:pk>/", editar_noticia, name="editar_noticia"),
+    path("excluir_noticia/<int:pk>/", login_required(excluir_noticia), name="excluir_noticia"),
+    path("editar_noticia/<int:pk>/", login_required(editar_noticia), name="editar_noticia"),
     path("logout/", logout_user, name="logout"),
-]
-
-urlpatterns += [
-    path(
-        "ckeditor5/", include("django_ckeditor_5.urls"), name="ck_editor_5_upload_file"
-    ),
+    path("ckeditor5/", include("django_ckeditor_5.urls"), name="ck_editor_5_upload_file"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

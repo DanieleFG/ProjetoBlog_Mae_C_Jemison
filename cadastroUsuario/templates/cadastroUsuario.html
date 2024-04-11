@@ -47,11 +47,10 @@
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="../static/img/_58e8e439-0d3e-421a-824d-cd4f84976bb5.jpeg" alt="" width="72" height="70">
       <h2 style="color: #6c757d;">Formulário de cadastro</h2>
-      
-    </div>
-    {% if sucesso %}
-    <h3 class="alert alert-success" style="color: #6c757d;">Cadastro efetuado com sucesso</h3>
-    {% else %}
+ 
+      {% if not contexto.status %}
+          <h3 class="alert alert-error" style="color: #FF0000;">{{ error }}</h3>
+      {% else %}
 
    
       <div class="text-center text-white">

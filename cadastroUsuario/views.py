@@ -118,7 +118,6 @@ def logout_user(request):
 def verificar_cadastro(request):
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
-    noticia_recente = fetchUltimoRegistro()
 
     if request.method == "POST":
         email = request.POST.get("email")
@@ -126,36 +125,13 @@ def verificar_cadastro(request):
 
         usuario = authenticate(request, username=email, password=senha)
         if usuario:
-            print("Login-------------")
-            print(login(request, usuario))
-            user = request.user
-            usuario_dados = Cadastro.objects.filter(email=user.email).first()
-            print(usuario_dados)
-            return render(
-                request,
-                "home.html",
-                {
-                    "usuarios": usuario_dados,
-                    "lancamentos": noticia_recente,
-                    "ult_noticias": ult_noticia,
-                },
-            )
+            login(request, usuario)
+            return redirect('logado')
+        
         elif request.POST.get("buscar-tag"):
             ult_noticia = fetchbuscarTag(request.POST.get("buscar-tag"))
-            contexto = {"ult_noticias": ult_noticia}
             return render(request, "categorias.html", contexto)
         else:
-            return HttpResponse("Usuário não autenticado!")
-    if request.user.is_authenticated:
-        user = request.user
-        usuario_dados = Cadastro.objects.filter(email=user).first()
-
-    return render(
-        request,
-        "home.html",
-        {
-            "usuarios": usuario_dados.nome,
-            "ult_noticias": ult_noticia,
-            "lancamento": noticia_recente,
-        },
-    )
+            contexto = {"erro_login": "Usuário não autenticado!"}
+            return render(request, "login.html", contexto)
+    return HttpResponse('deu ruim')
