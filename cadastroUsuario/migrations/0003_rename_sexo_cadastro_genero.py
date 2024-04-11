@@ -4,13 +4,14 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("cadastroUsuario", "0002_alter_cadastro_data_nascimento"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name="cadastro", old_name="sexo", new_name="genero",
+            model_name="cadastro",
+            old_name="sexo",
+            new_name="genero",
         ),
     ]

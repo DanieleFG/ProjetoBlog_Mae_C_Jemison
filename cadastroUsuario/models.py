@@ -3,9 +3,9 @@ from django.db import models
 
 class Cadastro(models.Model):
     Genero_Choice = (
-        ('F', 'Feminino'),
-        ('M', 'Masculino'),
-        ('O', 'Outros'),
+        ("F", "Feminino"),
+        ("M", "Masculino"),
+        ("O", "Outros"),
     )
 
     nome = models.CharField(max_length=50)
@@ -18,9 +18,9 @@ class Cadastro(models.Model):
     data_cadastro = models.DateTimeField(auto_now_add=True)
 
     def str(self):
-        return f'{self.usuario} [{self.email}]'
+        return f"{self.usuario} [{self.email}]"
 
     class Meta:
-        verbose_name = 'Formulário de Cadastro'
-        verbose_name_plural = 'Formulários de Cadastros'
-        ordering = ['-data_cadastro']
+        verbose_name = "Formulário de Cadastro"
+        verbose_name_plural = "Formulários de Cadastros"
+        ordering = ["-data_cadastro"]

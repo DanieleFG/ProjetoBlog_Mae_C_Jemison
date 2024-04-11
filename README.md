@@ -1,84 +1,91 @@
+# Projeto Final 
 O projeto final deste Bootcamp de Back-End visa consolidar e aplicar o
 conhecimento adquirido em GitHub, HTML5, CSS3, Bancos de Dados e o Framework
 Django. Vamos transformar essa jornada de aprendizado em um prático e
 envolvente Sistema de Blog com Django.
 
 
-# Projeto Final 
 ## Portal de Noticias Mae C Jemison
 
 ### Instalação do ambiente virtual
 
- ```
- pip install virtualenv
-
- ```
-
-### Criar ambiente Virtual
-
 ```
-python3 -m venv .venv
+pip install virtualenv
 
 ```
 
-### Ativar ambiente 
-```
-source .venv/bin/activate
+### Criar ambiente Virtual e Ativar
 
-```
-### Instalar Django
+- Windows
+   ```
+   python -m venv .venv
+   .venv/bin/activate
+   ```
+- linux:
 
-```
-pip install django
-
-```
-
-### Criar Projeto
-
-```
-django-admin startproject projeto_blog .
-
-```
+   ```
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
 
 ### Rodar o projeto
-```
-python3 manage.py runserver
 
-```
+- Windows
+   ```
+   python manage.py runserver
+   ```
+- linux:
+   ```
+   python3 manage.py runserver
+
+   ```
 ### Comando aplicativo
-```
-python3 manage.py startapp base
+- Windows
+   ```
+   python manage.py startapp base
 
-```
+   ```
+- linux:
+   ```
+   python3 manage.py startapp base
 
-
-### Comando instalar bootstrap
-
-``` 
-pip install django-bootstrap-v5
-
-```
+   ```
 
 ### Comandos para criar arquivo do Banco de Dados
 
- ```
-    python3 manage.py makemigrations
- ```
+- Windows
+   ```
+      python manage.py makemigrations
+   ```
+- linux:
+   ```
+      python3 manage.py makemigrations
+   ```
 
 ### Comandos para enviar para  Banco de Dados
-
+- Windows
+   ```
+      python manage.py migrate
+   ```
+- linux:
  ```
     python3 manage.py migrate
  ```
 
- ### Comandos para ecriar super usuario
+### Comandos para ecriar super usuario
+- Windows
+   ```
+      python manage.py createsuperuser
+   ```
+- linux:
+   ```
+      python3 manage.py createsuperuser
+   ```
+### Usuário Admin já criado 
+   usuario: admin
+   senha: admin
+   email: admin@gmail.com
 
- ```
-    python3 manage.py createsuperuser
- ```
 
-usuario: admin
-senha: admin
-email: admin@gmail.com
 video explicando upload imagens
 https://www.youtube.com/watch?v=uoiiwyemmvw
