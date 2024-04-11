@@ -63,29 +63,38 @@
             <input class="form-control me-2"  name="buscar-tag" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-         
       </div>
-      <div >
-        <form class="d-flex  justify-content-end" >
-
-            <a href="/cadastro"  class="btn btn-secondary me-4" >Cadastrar-se</i> </a>
+      <div>
+        <form class="d-flex  justify-content-end">
             {% if not usuarios %}
-            <a href="/login"  class="btn btn-primary" >Login</a>
-            {%else%}
-            <a href="/listarNoticias" class="btn btn-primary me-4" >Admin</i></a>
-            <a href="{% url 'logout' %}" class="fs-4 ps-4 pe-4 text-white" ><i class="bi bi-box-arrow-left"></i></a>
+            <a href="/login" class="btn btn-primary me-2">Login</a>
+            <a href="/cadastro" class="btn btn-secondary">Cadastrar-se</a>
+            {% else %}
+                {% if user.is_staff %}
+                <a href="/listarNoticias" class="btn btn-primary me-4">Gerênciar Noticias</a>
+                {% endif %}
+            <a href="{% url 'logout' %}" class="fs-4 ps-4 pe-4 text-white"><i class="bi bi-box-arrow-left"></i></a>
             {% endif %}
         </form>
-        
-      </div>
+    </div>
       </div>
     </nav>
 
-    {% if  usuarios %}
-    <div class="text-white" >
-     <h4 class="text-white"> Bem-vindo, {{ usuarios.nome }}!</h4>
+    {% if usuarios %}
+    <div class="text-white">
+        <h4 class="text-white"> Bem-vindo,
+            {% if user.is_staff %}
+            Autor
+            {% elif user.is_superuser %}
+            Administrador
+            {% else %}
+            Usuário
+            {% endif %} 
+            {{ usuarios.nome }}
+            !
+        </h4>
     </div>
-     {% endif %}
+    {% endif %}
     <!--Logo do site-->
     <div class="imagem-logo " >
       <img src="../static/img/PontoGeek_logo.png" class="rounded mx-auto d-block" alt="" width="350px" height="250px">
@@ -137,11 +146,9 @@
     </div>
   </div>
   <div class="row g-5">
-    <div class="col-md-8">
+    <div>
      {% block posts %} {%endblock%}
-     {%block posts2 %} {%endblock%}
-    </div>
-    <div class="col-md-4">
+     {% block posts2 %} {%endblock%}
     </div>
   </div>
 </main>
@@ -149,9 +156,6 @@
    
 <footer class="blog-footer">
   <p>&copy; 2024 Ponto Geek. Desenvolvido por Squad Mae C. Jemison.</p>
-  <p>
-    <a href="#">Back to top</a>
-  </p>
 </footer>
 
 

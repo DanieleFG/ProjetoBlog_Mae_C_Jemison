@@ -1,13 +1,11 @@
 import html
 
-from django.http import HttpResponse
-from django.db import connection
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Count
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from noticia.models import Categoria, Noticia
-from django.contrib.auth.models import User
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db import IntegrityError
 from cadastroUsuario.form import CadastroUsuarioForm
 from cadastroUsuario.models import Cadastro
 
@@ -18,17 +16,15 @@ def home(request):
     noticia_recente = fetchUltimoRegistro()
     contexto = {"ult_noticias": ult_noticia}
     contexto["lancamentos"] = noticia_recente
+
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user.email).first()
-        print("usuario User---------")
-        print(usuario_dados.nome)
         contexto["usuarios"] = usuario_dados
+
     if request.method == "POST":
         ult_noticia = fetchbuscarTag(request.POST.get("buscar-tag"))
         contexto["ult_noticias"] = ult_noticia
-        # print('-----------------------------------------------------')
-        # print(ult_noticia)
         return render(request, "categorias.html", contexto)
 
     print(contexto)
@@ -36,17 +32,29 @@ def home(request):
 
 
 def cadastroUsuario(request):
-    sucesso = False
-    form = CadastroUsuarioForm(request.POST or None)
-    if form.is_valid():
-        sucesso = True
-        form.save()
+    if request.user.is_authenticated:
+        return redirect('home')
+    
+    try:
+        message = {}
+        form = CadastroUsuarioForm(request.POST or None)
 
-    contexto = {"form": form, "sucesso": sucesso}
-    return render(request, "cadastroUsuario.html", contexto)
+        if form.is_valid():
+            message.update({'status': 'sucesso', 'texto': 'Cadastrado com sucesso', 'form': form})
+            form.save()
+            return redirect('login')
+        
+        message = {'status': 'erro', 'texto': 'Por favor, corrija os erros abaixo.', 'form': form}
+        return render(request, "cadastroUsuario.html", message)
+    
+    except IntegrityError:
+         message.update({'status': 'erro', 'texto': 'usuário já existe', 'form': form})
+         return render(request, "cadastroUsuario.html", message)
 
 
 def loginView(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     return render(request, "login.html")
 
 
@@ -75,16 +83,25 @@ def fetchUltimoRegistro():
     return ult_noticias_dict
 
 
-def fetchbuscarTag(buscar_tag):
+def fetchbuscarTag(buscar_tag, pagina_numero=1, noticias_por_pagina=10):
     ult_noticia = []
+
     if buscar_tag:
         ult_noticia.extend(Noticia.objects.filter(titulo__icontains=buscar_tag))
-        ult_noticia.extend(
-            Noticia.objects.filter(id_categoria__categoria__icontains=buscar_tag)
-        )
-        return ult_noticia
+        ult_noticia.extend(Noticia.objects.filter(id_categoria__categoria__icontains=buscar_tag))
     else:
-        return Noticia.objects.all()
+        ult_noticia = Noticia.objects.all()
+
+    paginator = Paginator(ult_noticia, noticias_por_pagina)
+
+    try:
+        ult_noticias = paginator.page(pagina_numero)
+    except PageNotAnInteger:
+        ult_noticias = paginator.page(1)
+    except EmptyPage:
+        ult_noticias = paginator.page(paginator.num_pages)
+
+    return ult_noticias
 
 
 def tratarConteudo(ult_noticia):
@@ -95,20 +112,33 @@ def tratarConteudo(ult_noticia):
 
 def categorias(request, categoria):
     contexto = {}
+    
     if request.user.is_authenticated:
         user = request.user
         usuario_dados = Cadastro.objects.filter(email=user.email).first()
-        print("usuario User")
-        print(usuario_dados.nome)
         contexto["usuarios"] = usuario_dados
+
     noticias = Noticia.objects.filter(id_categoria__categoria__icontains=categoria)
-    noticia_recente = fetchUltimoRegistro()
-    contexto["ult_noticias"] = noticias
+
+
+    noticias_por_pagina = 4
+
+    paginator = Paginator(noticias, noticias_por_pagina)
+    pagina_numero = request.GET.get('page')
+
+    try:
+        ult_noticias = paginator.page(pagina_numero)
+
+    except PageNotAnInteger:
+        ult_noticias = paginator.page(1)
+
+    except EmptyPage:
+        ult_noticias = paginator.page(paginator.num_pages)
+
+    contexto["ult_noticias"] = ult_noticias
     contexto["categoria"] = categoria
-    contexto["lancamentos"] = noticia_recente
 
     return render(request, "categorias.html", contexto)
-
 
 def logout_user(request):
     logout(request)
@@ -118,19 +148,17 @@ def logout_user(request):
 def verificar_cadastro(request):
     ult_noticia = Noticia.objects.all()
     ult_noticia = tratarConteudo(ult_noticia)
-    noticia_recente = fetchUltimoRegistro()
 
     if request.method == "POST":
         email = request.POST.get("email")
         senha = request.POST.get("senha")
-
+        noticia_recente = fetchUltimoRegistro()
         usuario = authenticate(request, username=email, password=senha)
+
         if usuario:
-            print("Login-------------")
-            print(login(request, usuario))
+            login(request, usuario)
             user = request.user
             usuario_dados = Cadastro.objects.filter(email=user.email).first()
-            print(usuario_dados)
             return render(
                 request,
                 "home.html",
@@ -140,22 +168,12 @@ def verificar_cadastro(request):
                     "ult_noticias": ult_noticia,
                 },
             )
+        
         elif request.POST.get("buscar-tag"):
             ult_noticia = fetchbuscarTag(request.POST.get("buscar-tag"))
             contexto = {"ult_noticias": ult_noticia}
-            return render(request, "categorias.html", contexto)
+            return render(request, "categorias.html")
+        
         else:
-            return HttpResponse("Usuário não autenticado!")
-    if request.user.is_authenticated:
-        user = request.user
-        usuario_dados = Cadastro.objects.filter(email=user).first()
-
-    return render(
-        request,
-        "home.html",
-        {
-            "usuarios": usuario_dados.nome,
-            "ult_noticias": ult_noticia,
-            "lancamento": noticia_recente,
-        },
-    )
+            contexto = {"erro_login": "Usuário não autenticado!"}
+            return render(request, "login.html", contexto)

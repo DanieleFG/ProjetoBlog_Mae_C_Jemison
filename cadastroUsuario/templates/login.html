@@ -35,6 +35,11 @@
   </head>
   <body class="text-center">
 <main class="form-signin">
+  {% if erro_login %}
+    <div class="alert alert-danger" role="alert">
+        {{ erro_login }}
+    </div>
+  {% endif %}
   <form action="{% url 'logado' %}" method="POST" id="login-form" novalidate>
     {% csrf_token %}
     <img class="mb-4" src="../static/img/_ef6bcc18-c191-42ab-ac16-5733f005fe26.jpeg" alt="" width="122" height="115">
@@ -49,9 +54,9 @@
       <label for="floatingPassword">Senha</label>
     </div>
 
-    <div class="checkbox mb-3">
+    <div>
       <label>
-        <input type="checkbox" value="Lembre-se de mim"> Lembre-se de mim
+        Não tem conta? <a href='/cadastro'>registre-se aqui</a>
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
