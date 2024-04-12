@@ -87,5 +87,3 @@ pip install virtualenv
    email: admin@gmail.com
 
 
-video explicando upload imagens
-https://www.youtube.com/watch?v=uoiiwyemmvw
