@@ -4,7 +4,18 @@ conhecimento adquirido em GitHub, HTML5, CSS3, Bancos de Dados e o Framework
 Django. Vamos transformar essa jornada de aprendizado em um prático e
 envolvente Sistema de Blog com Django.
 
+### _Membros da Squad:_
 
+- Ana Paula Martins Braga | [apmbraga](https://github.com/apmbraga)
+- Angela Filomena | [anbaptista](https://github.com/anbaptista/)
+- Daniele Ferreira Galvão | [DanieleFG](https://github.com/DanieleFG)
+- Indhira Viana Freire | [Indhira Viana](https://github.com/Indy-electro)
+- Manuele Maurício Lamenha | [Manu](https://github.com/Manu3052)
+- Millena Figueredo | [MildePaula](https://github.com/MildePaula)
+- Quesia De Araújo Santos | [quesia-araujo](https://github.com/quesia-araujo)
+- Siomara Mota | [siomara777](https://github.com/siomara777)
+- Tamar Bender | [tamarbender](https://github.com/tamarbender)
+- Yohanna Oliveira Cavalcanti | [8b1tz](https://github.com/8b1tz)
 ## Portal de Noticias Mae C Jemison
 
 ### Instalação do ambiente virtual
