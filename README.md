@@ -13,8 +13,6 @@ envolvente Sistema de Blog com Django.
 - Manuele Maurício Lamenha | [Manu](https://github.com/Manu3052)
 - Millena Figueredo | [MildePaula](https://github.com/MildePaula)
 - Quesia De Araújo Santos | [quesia-araujo](https://github.com/quesia-araujo)
-- Siomara Mota | [siomara777](https://github.com/siomara777)
-- Tamar Bender | [tamarbender](https://github.com/tamarbender)
 - Yohanna Oliveira Cavalcanti | [8b1tz](https://github.com/8b1tz)
 ## Portal de Noticias Mae C Jemison
 
